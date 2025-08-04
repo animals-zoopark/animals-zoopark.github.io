@@ -1504,33 +1504,41 @@
     <script>
         // Игровые данные
         const animals = [
-            { id: 'cat', name: 'Котёнок', basePrice: 100, income: 1, image: 'cat.gif', owned: 0, food: 0.2 },
-            { id: 'dog', name: 'Щенок', basePrice: 300, income: 2, image: 'dog.gif', owned: 0, food: 0.4 },
-            { id: 'rabbit', name: 'Кролик', basePrice: 500, income: 3, image: 'bunny.gif', owned: 0, food: 0.5 },
-            { id: 'fox', name: 'Лиса', basePrice: 1000, income: 5, image: 'fox.gif', owned: 0, food: 0.8 },
-            { id: 'hamster', name: 'Хомяк', basePrice: 1500, income: 7, image: 'hamster.gif', owned: 0, food: 1.0 },
-            { id: 'fisha', name: 'Рыбка', basePrice: 2000, income: 10, image: 'fisha.gif', owned: 0, food: 1.6 },
-            { id: 'oir', name: 'Сова', basePrice: 3000, income: 15, image: 'oir.gif', owned: 0, food: 1.0 },
-            { id: 'pig', name: 'Свинка', basePrice: 5000, income: 23, image: 'pig.gif', owned: 0, food: 1.0 },
-            { id: 'koala', name: 'Коала', basePrice: 8000, income: 31, image: 'koala.gif', owned: 0, food: 1.0 },
-            { id: 'cow', name: 'Корова', basePrice: 12000, income: 42, image: 'cow.gif', owned: 0, food: 2.5 },
-            { id: 'bear', name: 'Мишка', basePrice: 20000, income: 63, image: 'bear.gif', owned: 0, food: 2.0 },
-            { id: 'whitebear', name: 'Былый мишка', basePrice: 50000, income: 95, image: 'whitebear.gif', owned: 0, food: 2.5 },
-            { id: 'peacock', name: 'Павлин', basePrice: 100000, income: 155, image: 'peacock.gif', owned: 0, food: 4.0 },
-            { id: 'panda', name: 'Панда', basePrice: 200000, income: 240, image: 'panda.gif', owned: 0, food: 6.0 }, 
-            { id: 'tiger', name: 'Тигр', basePrice: 300000, income: 360, image: 'tiger.gif', owned: 0, food: 7.0 },
-            { id: 'lion', name: 'Лев', basePrice: 400000, income: 540, image: 'lev.gif', owned: 0, food: 8.0 },
-            { id: 'unicorn', name: 'Единорог', basePrice: 700000, income: 750, image: 'unicorn.gif', owned: 0, food: 9.0 },
-            { id: 'drugon', name: 'Дракон', basePrice: 1000000, income: 1000, image: 'drugon.gif', owned: 0, food: 10.0 }
+            { id: 'cat', name: 'Котёнок', basePrice: 200, income: 1, image: 'cat.gif', owned: 0, food: 0.1 },
+            { id: 'dog', name: 'Щенок', basePrice: 280, income: 3, image: 'dog.gif', owned: 0, food: 0.3 },
+            { id: 'rabbit', name: 'Кролик', basePrice: 410, income: 4, image: 'bunny.gif', owned: 0, food: 0.4 },
+            { id: 'rat', name: 'Крыска', basePrice: 590, income: 5, image: 'rat.gif', owned: 0, food: 0.5 },
+            { id: 'fox', name: 'Лиса', basePrice: 860, income: 7, image: 'fox.gif', owned: 0, food: 0.7 },
+            { id: 'hamster', name: 'Хомяк', basePrice: 1245, income: 9, image: 'hamster.gif', owned: 0, food: 0.9 },
+            { id: 'fisha', name: 'Рыбка', basePrice: 1805, income: 10, image: 'fisha.gif', owned: 0, food: 1.0 },
+            { id: 'lizard', name: 'Ящерка', basePrice: 2620, income: 15, image: 'lizard.gif', owned: 0, food: 1.5 },
+            { id: 'oir', name: 'Сова', basePrice: 3800, income: 20, image: 'oir.gif', owned: 0, food: 2.0 },
+            { id: 'turtle', name: 'Черепашка', basePrice: 5505, income: 25, image: 'turtle.gif', owned: 0, food: 2.5 },
+            { id: 'pig', name: 'Свинка', basePrice: 7985, income: 33, image: 'pig.gif', owned: 0, food: 3.3 },
+            { id: 'koala', name: 'Коала', basePrice: 11575, income: 40, image: 'koala.gif', owned: 0, food: 4.0 },
+            { id: 'cow', name: 'Корова', basePrice: 16785, income: 55, image: 'cow.gif', owned: 0, food: 5.5 },
+            { id: 'buffalo', name: 'Буйвал', basePrice: 24340, income: 70, image: 'buffalo.gif', owned: 0, food: 7.0 },
+            { id: 'bear', name: 'Мишка', basePrice: 35290, income: 95, image: 'bear.gif', owned: 0, food: 9.5 },
+            { id: 'whitebear', name: 'Былый мишка', basePrice: 51175, income: 120, image: 'whitebear.gif', owned: 0, food: 12.0 },
+            { id: 'peacock', name: 'Павлин', basePrice: 74205, income: 160, image: 'peacock.gif', owned: 0, food: 16.0 },
+            { id: 'fursel', name: 'Морской котик', basePrice: 107595, income: 210, image: 'fursel.gif', owned: 0, food: 21.0 },
+            { id: 'dolphin', name: 'Дельфин', basePrice: 156010, income: 270, image: 'dolphin.gif', owned: 0, food: 27.0 },
+            { id: 'panda', name: 'Панда', basePrice: 226220, income: 350, image: 'panda.gif', owned: 0, food: 35.0 }, 
+            { id: 'tiger', name: 'Тигр', basePrice: 328015, income: 455, image: 'tiger.gif', owned: 0, food: 45.5 },
+            { id: 'lion', name: 'Лев', basePrice: 475625, income: 590, image: 'lev.gif', owned: 0, food: 59.0 },
+            { id: 'unicorn', name: 'Единорог', basePrice: 689655, income: 770, image: 'unicorn.gif', owned: 0, food: 77.0 },
+            { id: 'drugon', name: 'Дракон', basePrice: 1000000, income: 1000, image: 'drugon.gif', owned: 0, food: 100.0 }
         ];
         
         const foods = [
-            { id: 'carrot', name: 'Морковь', basePrice: 100, amount: 10, image: 'morkov.gif', effect: 'Накормите кроликов' },
-            { id: 'fish', name: 'Рыба', basePrice: 200, amount: 40, image: 'fish.gif', effect: 'Кошки будут довольны' },
-            { id: 'meat', name: 'Мясо', basePrice: 300, amount: 100, image: 'meat.gif', effect: 'Для хищных животных' },
-            { id: 'hay', name: 'Сено', basePrice: 400, amount: 800, image: 'seno.gif', effect: 'Для травоядных животных' },
-            { id: 'fruit', name: 'Фрукты', basePrice: 700, amount: 1500, image: 'banana.gif', effect: 'Витамины для всех' },
-            { id: 'premium', name: 'Премиум корм', basePrice: 1000, amount: 3000, image: 'premi.gif', effect: 'Балдешь' }
+            { id: 'grass', name: 'Трава', basePrice: 160, amount: 2.8, image: 'grass.gif', effect: 'Для травоядных животных' },
+            { id: 'hay', name: 'Сено', basePrice: 205, amount: 3.4, image: 'seno.gif', effect: 'Для травоядных животных' },
+            { id: 'ant', name: 'Насекомые', basePrice: 270, amount: 4.0, image: 'ant.gif', effect: 'Для травоядных животных' },
+            { id: 'carrot', name: 'Морковь', basePrice: 350, amount: 4.8, image: 'morkov.gif', effect: 'Накормите кроликов' },
+            { id: 'fish', name: 'Рыба', basePrice: 455, amount: 5.8, image: 'fish.gif', effect: 'Кошки будут довольны' },
+            { id: 'meat', name: 'Мясо', basePrice: 590, amount: 6.9, image: 'meat.gif', effect: 'Для хищных животных' },
+            { id: 'fruit', name: 'Фрукты', basePrice: 770, amount: 8.3, image: 'banana.gif', effect: 'Витамины для всех' },
+            { id: 'premium', name: 'Премиум корм', basePrice: 1000, amount: 10.0, image: 'premi.gif', effect: 'Балдешь' }
         ];
 
         // Гифки для игр (все доступные изображения)
@@ -2134,12 +2142,12 @@
                 games: gameState.games,
                 usedPromoCodes: gameState.usedPromoCodes
             };
-            localStorage.setItem('lpk', JSON.stringify(saveData));
+            localStorage.setItem('lopl', JSON.stringify(saveData));
         }
         
         // Загрузка игры
         function loadGame() {
-            const saveData = localStorage.getItem('lpk');
+            const saveData = localStorage.getItem('lopl');
             
             if (saveData) {
                 try {
