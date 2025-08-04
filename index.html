@@ -1184,31 +1184,82 @@
             grid-row: 2;
         }
 
-        /* НОВАЯ ИГРА: Кликер животных */
-        .clicker-game-board {
+        /* НОВАЯ ИГРА: Корми животных */
+        .feeding-game-board {
             position: relative;
             width: 100%;
             height: 350px;
             background: rgba(0, 0, 0, 0.05);
             border-radius: 10px;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
         
-        .clicker-object {
-            position: absolute;
-            cursor: pointer;
-            z-index: 5;
-            transition: transform 0.1s;
+        .current-animal {
+            flex: 3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            text-align: center;
         }
         
-        .clicker-object img {
+        .animal-image {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 15px;
+        }
+        
+        .animal-image img {
             width: 100%;
             height: 100%;
             object-fit: contain;
-            filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.3));
         }
         
-        .clicker-score {
+        .animal-desire {
+            font-size: 18px;
+            font-weight: 700;
+            margin-top: 10px;
+            color: var(--text-color);
+            background: rgba(255, 255, 255, 0.7);
+            padding: 10px 20px;
+            border-radius: 20px;
+        }
+        
+        .food-options {
+            flex: 2;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            padding: 10px;
+        }
+        
+        .food-option {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            overflow: hidden;
+        }
+        
+        .food-option img {
+            width: 60%;
+            height: 60%;
+            object-fit: contain;
+        }
+        
+        .food-option:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .feeding-score {
             text-align: center;
             font-size: 18px;
             font-weight: 700;
@@ -1216,7 +1267,7 @@
             color: var(--text-color);
         }
         
-        .clicker-timer {
+        .feeding-timer {
             font-size: 24px;
             font-weight: 700;
             text-align: center;
@@ -1224,9 +1275,41 @@
             color: var(--section-title-color);
         }
         
-        @media (max-width: 768px) {
-            .clicker-game-board {
-                height: 300px;
+        /* Эффекты при наведении */
+        .animal-card:hover .animal-avatar img {
+            transform: scale(1.3);
+        }
+        
+        .animal-card:hover .animal-food-info {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .animal-food-info {
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 8px;
+            text-align: center;
+            font-size: 12px;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 10;
+            border-radius: 0 0 16px 16px;
+        }
+        
+        .food-card:hover .food-image img {
+            transform: scale(1.3);
+        }
+        
+        /* Увеличенная высота для парных карточек на десктопе */
+        @media (min-width: 769px) {
+            #memory-game .game-board {
+                height: 900px;
             }
         }
 
@@ -1463,28 +1546,37 @@
                     </div>
                 </div>
 
-                <!-- НОВАЯ ИГРА: Кликер животных -->
-                <div class="game-container" id="clicker-game">
+                <!-- НОВАЯ ИГРА: Корми животных -->
+                <div class="game-container" id="feeding-game">
                     <div class="game-title">
-                        <i class="fas fa-mouse-pointer"></i>Кликер животных
+                        <i class="fas fa-utensils"></i>Корми животных
                     </div>
                     <div class="game-description">
-                        Кликайте на животных, которые появляются на экране! Каждый клик приносит 1 монету.
-                        Игра длится 30 секунд. После игры будет перезарядка 2 минуты.
+                        Корми животных правильной едой! За каждое правильно накормленное животное получи 1 монету.
                     </div>
                     <div class="game-board">
-                        <div class="clicker-game-board" id="clicker-area"></div>
-                        <div class="clicker-score">Кликов: <span id="clicker-score">0</span></div>
-                        <div class="clicker-timer" id="clicker-timer">00:30</div>
+                        <div class="feeding-game-board">
+                            <div class="current-animal" id="current-animal">
+                                <div class="animal-image">
+                                    <img id="animal-img" src="" alt="Animal">
+                                </div>
+                                <div class="animal-desire" id="animal-desire"></div>
+                            </div>
+                            <div class="food-options" id="food-options">
+                                <!-- Варианты еды будут здесь -->
+                            </div>
+                        </div>
+                        <div class="feeding-score">Правильно: <span id="feeding-score">0</span></div>
+                        <div class="feeding-timer" id="feeding-timer">00:30</div>
                     </div>
                     <div class="game-controls">
-                        <button class="game-button" id="clicker-start">
+                        <button class="game-button" id="feeding-start">
                             <i class="fas fa-play"></i>Начать игру
                         </button>
                     </div>
-                    <div class="game-cooldown" id="clicker-cooldown" style="display: none;">
+                    <div class="game-cooldown" id="feeding-cooldown" style="display: none;">
                         <div>Перезарядка</div>
-                        <div id="clicker-cooldown-timer">02:00</div>
+                        <div id="feeding-cooldown-timer">02:00</div>
                     </div>
                 </div>
             </div>
@@ -1574,7 +1666,7 @@
                 memory: { active: false, cards: [], flippedCards: [], matchedPairs: 0, moves: 0 },
                 snake: { active: false, cooldown: 0, score: 0 },
                 catch: { active: false, cooldown: 0, score: 0 },
-                clicker: { active: false, cooldown: 0, score: 0 } // Добавлено состояние для новой игры
+                feeding: { active: false, cooldown: 0, score: 0 } // Новая игра
             },
             usedPromoCodes: []
         };
@@ -1629,13 +1721,16 @@
         const catchCooldownEl = document.getElementById('catch-cooldown');
         const catchCooldownTimer = document.getElementById('catch-cooldown-timer');
         
-        // Элементы для новой игры "Кликер животных"
-        const clickerAreaEl = document.getElementById('clicker-area');
-        const clickerStartBtn = document.getElementById('clicker-start');
-        const clickerScoreEl = document.getElementById('clicker-score');
-        const clickerTimerEl = document.getElementById('clicker-timer');
-        const clickerCooldownEl = document.getElementById('clicker-cooldown');
-        const clickerCooldownTimer = document.getElementById('clicker-cooldown-timer');
+        // Элементы для новой игры "Корми животных"
+        const currentAnimalEl = document.getElementById('current-animal');
+        const animalImgEl = document.getElementById('animal-img');
+        const animalDesireEl = document.getElementById('animal-desire');
+        const foodOptionsEl = document.getElementById('food-options');
+        const feedingScoreEl = document.getElementById('feeding-score');
+        const feedingTimerEl = document.getElementById('feeding-timer');
+        const feedingStartBtn = document.getElementById('feeding-start');
+        const feedingCooldownEl = document.getElementById('feeding-cooldown');
+        const feedingCooldownTimer = document.getElementById('feeding-cooldown-timer');
         
         // Элементы для промокодов
         const promoModal = document.getElementById('promoModal');
@@ -1673,7 +1768,7 @@
             setupMemoryGame();
             setupSnakeGame();
             setupCatchGame();
-            setupClickerGame(); // Инициализация новой игры
+            setupFeedingGame(); // Инициализация новой игры
         }
         
         // Рассчитать общее количество животных
@@ -1862,6 +1957,7 @@
                 animalCard.innerHTML = `
                     <div class="animal-avatar">
                         <img src="${animal.image}" alt="${animal.name}">
+                        <div class="animal-food-info">Потребление: ${animal.food} ед/мин</div>
                     </div>
                     <div class="animal-info">
                         <div class="animal-name">
@@ -2166,7 +2262,7 @@
                         memory: { active: false, cards: [], flippedCards: [], matchedPairs: 0, moves: 0 },
                         snake: { active: false, cooldown: 0, score: 0 },
                         catch: { active: false, cooldown: 0, score: 0 },
-                        clicker: { active: false, cooldown: 0, score: 0 } // Добавлено состояние для новой игры
+                        feeding: { active: false, cooldown: 0, score: 0 }
                     };
                     gameState.usedPromoCodes = parsedData.usedPromoCodes || [];
                     
@@ -2261,7 +2357,7 @@
                     buttonColor1: '#4caf50', buttonColor2: '#2e7d32',
                     highlightColor: '#76ff03',
                     textColor: '#333',
-                    priceColor: '#ffd700',
+                    priceColor: '#ff6f00',
                     sectionTitleColor: '#2e7d32',
                     activeTabColor: '#2e7d32',
                     iconBgColor: '#e8f5e9',
@@ -2925,99 +3021,118 @@
             }
         }
 
-        // НОВАЯ ИГРА: Кликер животных
-        function setupClickerGame() {
-            let gameInterval;
-            let spawnInterval;
-            let gameTimer;
-            let timeLeft;
+        // НОВАЯ ИГРА: Корми животных
+        function setupFeedingGame() {
+            let feedingTimer;
+            let currentAnimal = null;
+            let correctFood = null;
+            let options = [];
             
-            clickerStartBtn.addEventListener('click', () => {
-                if (gameState.games.clicker.cooldown > 0) return;
+            function generateTask() {
+                // Выбираем случайное животное
+                const animalIndex = Math.floor(Math.random() * gameState.animals.length);
+                currentAnimal = gameState.animals[animalIndex];
                 
-                clickerAreaEl.innerHTML = '';
-                gameState.games.clicker.score = 0;
-                clickerScoreEl.textContent = '0';
+                // Выбираем правильную еду
+                const foodIndex = Math.floor(Math.random() * gameState.foods.length);
+                correctFood = gameState.foods[foodIndex];
                 
-                gameState.games.clicker.active = true;
-                clickerStartBtn.disabled = true;
+                // Обновляем интерфейс
+                animalImgEl.src = currentAnimal.image;
+                animalDesireEl.textContent = `Хочу ${correctFood.name.toLowerCase()}`;
                 
-                timeLeft = 30;
-                clickerTimerEl.textContent = '00:30';
+                // Генерируем варианты ответов (3 неправильных + 1 правильный)
+                options = [...gameState.foods];
                 
-                spawnInterval = setInterval(spawnClickerObject, 800);
+                // Удаляем правильный ответ
+                options.splice(foodIndex, 1);
                 
-                gameTimer = setInterval(() => {
+                // Выбираем 3 случайных неправильных ответа
+                const wrongOptions = [];
+                while (wrongOptions.length < 3 && options.length > 0) {
+                    const randomIndex = Math.floor(Math.random() * options.length);
+                    wrongOptions.push(options[randomIndex]);
+                    options.splice(randomIndex, 1);
+                }
+                
+                // Добавляем правильный ответ
+                wrongOptions.push(correctFood);
+                
+                // Перемешиваем варианты
+                for (let i = wrongOptions.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [wrongOptions[i], wrongOptions[j]] = [wrongOptions[j], wrongOptions[i]];
+                }
+                
+                // Очищаем контейнер
+                foodOptionsEl.innerHTML = '';
+                
+                // Добавляем варианты
+                wrongOptions.forEach(food => {
+                    const foodOption = document.createElement('div');
+                    foodOption.className = 'food-option';
+                    foodOption.dataset.id = food.id;
+                    foodOption.innerHTML = `<img src="${food.image}" alt="${food.name}">`;
+                    foodOption.addEventListener('click', () => checkAnswer(food));
+                    foodOptionsEl.appendChild(foodOption);
+                });
+            }
+            
+            function checkAnswer(selectedFood) {
+                if (!gameState.games.feeding.active) return;
+                
+                if (selectedFood.id === correctFood.id) {
+                    // Правильный ответ
+                    gameState.games.feeding.score++;
+                    feedingScoreEl.textContent = gameState.games.feeding.score;
+                    gameState.coins += 1;
+                    updateUI();
+                    showNotification('Правильно! +1 монета');
+                } else {
+                    // Неправильный ответ
+                    showNotification('Неправильно! Попробуй еще раз', 'error');
+                }
+                
+                // Генерируем новое задание
+                generateTask();
+            }
+            
+            feedingStartBtn.addEventListener('click', () => {
+                if (gameState.games.feeding.cooldown > 0) return;
+                
+                gameState.games.feeding.active = true;
+                gameState.games.feeding.score = 0;
+                feedingScoreEl.textContent = '0';
+                feedingStartBtn.disabled = true;
+                
+                let timeLeft = 30;
+                feedingTimerEl.textContent = '00:30';
+                
+                // Генерируем первое задание
+                generateTask();
+                
+                // Запускаем таймер
+                feedingTimer = setInterval(() => {
                     timeLeft--;
                     const seconds = timeLeft % 60;
-                    clickerTimerEl.textContent = `00:${seconds.toString().padStart(2, '0')}`;
+                    feedingTimerEl.textContent = `00:${seconds.toString().padStart(2, '0')}`;
                     
                     if (timeLeft <= 0) {
-                        endClickerGame();
+                        endFeedingGame();
                     }
                 }, 1000);
             });
             
-            function spawnClickerObject() {
-                if (!gameState.games.clicker.active) return;
+            function endFeedingGame() {
+                clearInterval(feedingTimer);
                 
-                const animalImage = gameImages.animals[Math.floor(Math.random() * gameImages.animals.length)];
-                const size = 60 + Math.floor(Math.random() * 40);
+                gameState.games.feeding.active = false;
+                feedingStartBtn.disabled = false;
                 
-                const objectElement = document.createElement('div');
-                objectElement.className = 'clicker-object';
-                objectElement.style.width = `${size}px`;
-                objectElement.style.height = `${size}px`;
-                objectElement.style.left = `${10 + Math.random() * 80}%`;
-                objectElement.style.top = `${10 + Math.random() * 70}%`;
-                objectElement.innerHTML = `<img src="${animalImage}" alt="Animal">`;
+                showNotification(`Игра окончена! Вы накормили ${gameState.games.feeding.score} животных`);
                 
-                objectElement.addEventListener('click', handleClickerClick);
-                
-                clickerAreaEl.appendChild(objectElement);
-                
-                setTimeout(() => {
-                    if (objectElement.parentNode) {
-                        objectElement.remove();
-                    }
-                }, 2000);
-            }
-            
-            function handleClickerClick(e) {
-                const object = e.currentTarget;
-                
-                gameState.games.clicker.score++;
-                gameState.coins += 1;
-                
-                clickerScoreEl.textContent = gameState.games.clicker.score;
-                updateUI();
-                
-                createCoinAnimation();
-                
-                object.style.transform = 'scale(0.9)';
-                setTimeout(() => {
-                    object.style.transform = 'scale(1)';
-                }, 100);
-                
-                setTimeout(() => {
-                    if (object.parentNode) {
-                        object.remove();
-                    }
-                }, 300);
-            }
-            
-            function endClickerGame() {
-                gameState.games.clicker.active = false;
-                clickerStartBtn.disabled = false;
-                
-                clearInterval(spawnInterval);
-                clearInterval(gameTimer);
-                
-                const coinsEarned = gameState.games.clicker.score;
-                showNotification(`Игра окончена! Вы заработали ${coinsEarned} монет!`);
-                
-                gameState.games.clicker.cooldown = 120;
-                clickerCooldownEl.style.display = 'flex';
+                gameState.games.feeding.cooldown = 120;
+                feedingCooldownEl.style.display = 'flex';
             }
         }
         
@@ -3047,15 +3162,15 @@
                 }
             }
             
-            // Кликер животных
-            if (gameState.games.clicker.cooldown > 0) {
-                gameState.games.clicker.cooldown--;
-                const minutes = Math.floor(gameState.games.clicker.cooldown / 60);
-                const seconds = gameState.games.clicker.cooldown % 60;
-                clickerCooldownTimer.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            // Корми животных
+            if (gameState.games.feeding.cooldown > 0) {
+                gameState.games.feeding.cooldown--;
+                const minutes = Math.floor(gameState.games.feeding.cooldown / 60);
+                const seconds = gameState.games.feeding.cooldown % 60;
+                feedingCooldownTimer.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
                 
-                if (gameState.games.clicker.cooldown <= 0) {
-                    clickerCooldownEl.style.display = 'none';
+                if (gameState.games.feeding.cooldown <= 0) {
+                    feedingCooldownEl.style.display = 'none';
                 }
             }
         }
