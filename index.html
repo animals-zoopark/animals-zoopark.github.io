@@ -267,25 +267,44 @@
             font-size: 13px;
         }
         
-        .animals-grid {
+        .animals-grid, .toys-grid, .exclusive-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 22px;
             margin-bottom: 8px;
         }
         
-        .animal-card {
+        .animal-card, .toy-card, .exclusive-card {
             border-radius: 16px;
             overflow: hidden;
             box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             z-index: 3;
-            background: linear-gradient(135deg, var(--card-color1), var(--card-color2));
             transition: all 0.5s ease;
         }
         
-        .animal-card::before {
+        .animal-card {
+            background: linear-gradient(135deg, var(--card-color1), var(--card-color2));
+        }
+        
+        .toy-card {
+            background: linear-gradient(135deg, var(--toy-color1), var(--toy-color2));
+        }
+        
+        .exclusive-card {
+            background: linear-gradient(135deg, var(--exclusive-color1), var(--exclusive-color2));
+            color: white;
+        }
+        
+        .exclusive-card .animal-name,
+        .exclusive-card .animal-price,
+        .exclusive-card .toy-name,
+        .exclusive-card .toy-price {
+            color: white !important;
+        }
+        
+        .animal-card::before, .toy-card::before, .exclusive-card::before {
             content: '';
             position: absolute;
             top: 0;
@@ -298,7 +317,7 @@
             pointer-events: none;
         }
         
-        .animal-avatar {
+        .animal-avatar, .toy-image, .exclusive-image {
             width: 100%;
             height: 180px;
             display: flex;
@@ -306,12 +325,23 @@
             align-items: center;
             overflow: hidden;
             position: relative;
-            background: linear-gradient(135deg, var(--header-color1), var(--header-color2));
             transition: all 0.5s ease;
             z-index: 2;
         }
         
-        .animal-avatar::before {
+        .animal-avatar {
+            background: linear-gradient(135deg, var(--header-color1), var(--header-color2));
+        }
+        
+        .toy-image {
+            background: linear-gradient(135deg, var(--toy-color1), var(--toy-color2));
+        }
+        
+        .exclusive-image {
+            background: linear-gradient(135deg, var(--exclusive-color1), var(--exclusive-color2));
+        }
+        
+        .animal-avatar::before, .toy-image::before, .exclusive-image::before {
             content: '';
             position: absolute;
             top: 0;
@@ -322,7 +352,7 @@
             transition: all 0.5s ease;
         }
         
-        .animal-avatar img {
+        .animal-avatar img, .toy-image img, .exclusive-image img {
             width: 80%;
             height: 80%;
             object-fit: contain;
@@ -330,13 +360,13 @@
             filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.7));
         }
         
-        .animal-info {
+        .animal-info, .toy-info, .exclusive-info {
             padding: 12px;
             position: relative;
             z-index: 2;
         }
         
-        .animal-name {
+        .animal-name, .toy-name, .exclusive-name {
             font-weight: 700;
             font-size: 14px;
             margin-bottom: 6px;
@@ -347,7 +377,7 @@
             text-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
         }
         
-        .animal-price {
+        .animal-price, .toy-price, .exclusive-price {
             display: flex;
             align-items: center;
             gap: 4px;
@@ -798,7 +828,7 @@
                 font-size: 12px;
             }
             
-            .animals-grid {
+            .animals-grid, .toys-grid, .exclusive-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 8px;
             }
@@ -865,7 +895,7 @@
         }
         
         /* Анимации для карточек */
-        .animal-card:hover, .food-card:hover {
+        .animal-card:hover, .food-card:hover, .toy-card:hover, .exclusive-card:hover {
             transform: translateY(-8px) scale(1.02);
             box-shadow: 0 12px 24px rgba(0, 0, 0, 0.18);
         }
@@ -950,6 +980,156 @@
             color: var(--text-color);
         }
         
+        /* НОВАЯ ИГРА: Уход за животными */
+        .animal-care-game {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .animal-display {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+        }
+        
+        .animal-face {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        
+        .animal-face img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.3s;
+        }
+        
+        .animal-status {
+            font-size: 16px;
+            font-weight: 700;
+            margin-top: 10px;
+            text-align: center;
+        }
+        
+        .stats-bars {
+            width: 100%;
+            max-width: 300px;
+            margin-top: 15px;
+        }
+        
+        .stat-bar {
+            margin-bottom: 12px;
+        }
+        
+        .stat-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        
+        .stat-name {
+            font-weight: 500;
+        }
+        
+        .stat-value {
+            font-weight: 700;
+        }
+        
+        .bar-container {
+            height: 12px;
+            background: #e0e0e0;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        
+        .bar-fill {
+            height: 100%;
+            border-radius: 6px;
+            transition: width 0.3s ease;
+        }
+        
+        .hunger-bar { background: linear-gradient(90deg, #ff5252, #ff0000); }
+        .clean-bar { background: linear-gradient(90deg, #64b5f6, #1976d2); }
+        .mood-bar { background: linear-gradient(90deg, #ffd54f, #ff9800); }
+        
+        .actions-container {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            padding: 10px;
+        }
+        
+        .action-btn {
+            background: rgba(255, 255, 255, 0.8);
+            border: none;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            padding: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .action-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .action-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .action-btn i {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+        
+        .action-text {
+            font-size: 12px;
+            font-weight: 500;
+            text-align: center;
+        }
+        
+        .care-score {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 700;
+            margin-top: 10px;
+            color: var(--text-color);
+        }
+        
+        .care-timer {
+            font-size: 24px;
+            font-weight: 700;
+            text-align: center;
+            margin-top: 10px;
+            color: var(--section-title-color);
+        }
+        
+        .animal-reaction {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 24px;
+            opacity: 0;
+            transition: all 0.5s;
+        }
+
         /* Остальные стили игр без изменений */
         .catch-area {
             position: relative;
@@ -1318,6 +1498,312 @@
                 display: none;
             }
         }
+        
+        /* Секции "Мои" */
+        .my-section {
+            background: rgba(var(--card-bg-rgb), 0.9);
+            border-radius: 12px;
+            padding: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            margin-bottom: 14px;
+            z-index: 3;
+            color: var(--text-color);
+        }
+        
+        .items-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .item-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: rgba(var(--stats-bg-rgb), 0.7);
+            padding: 10px;
+            border-radius: 10px;
+            min-width: 80px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 6px rgba(0, 136, 204, 0.1);
+        }
+        
+        .item-icon {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: var(--icon-bg-color);
+            border-radius: 50%;
+        }
+        
+        .item-icon img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.2));
+        }
+        
+        .item-count {
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--price-color);
+            text-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+        }
+        
+        .exclusive-item {
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+        }
+
+        /* Стили для системы достижений */
+        .achievement-notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            z-index: 10000;
+            opacity: 0;
+            transition: opacity 0.3s, transform 0.3s;
+            transform: translateX(-50%) translateY(-100px);
+        }
+        
+        .achievement-notification.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        
+        .achievement-notification.bronze {
+            border-left: 5px solid #cd7f32;
+        }
+        
+        .achievement-notification.silver {
+            border-left: 5px solid #c0c0c0;
+        }
+        
+        .achievement-notification.gold {
+            border-left: 5px solid #ffd700;
+        }
+        
+        .achievement-notification.diamond {
+            border-left: 5px solid #b9f2ff;
+        }
+        
+        .achievement-icon {
+            font-size: 24px;
+        }
+        
+        .achievement-text {
+            flex-grow: 1;
+        }
+        
+        .achievement-title {
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        .achievement-description {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .achievement-reward {
+            font-weight: bold;
+            color: gold;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        /* Стили для страницы достижений */
+        .achievements-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .achievement-card {
+            background: rgba(var(--card-bg-rgb), 0.9);
+            border-radius: 15px;
+            padding: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .achievement-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .achievement-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        
+        .achievement-medal {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 24px;
+        }
+        
+        .achievement-medal.bronze {
+            background: linear-gradient(135deg, #cd7f32, #a67c52);
+            color: white;
+        }
+        
+        .achievement-medal.silver {
+            background: linear-gradient(135deg, #c0c0c0, #a0a0a0);
+            color: white;
+        }
+        
+        .achievement-medal.gold {
+            background: linear-gradient(135deg, #ffd700, #daa520);
+            color: white;
+        }
+        
+        .achievement-medal.diamond {
+            background: linear-gradient(135deg, #b9f2ff, #70d1e4);
+            color: white;
+        }
+        
+        .achievement-title {
+            font-weight: 700;
+            font-size: 17px;
+            color: var(--text-color);
+        }
+        
+        .achievement-description {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+        
+        .achievement-reward {
+            background: rgba(255, 215, 0, 0.1);
+            border-radius: 10px;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .reward-coins {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-weight: 700;
+            color: #e6b800;
+        }
+        
+        .reward-food {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-weight: 700;
+            color: #27ae60;
+        }
+        
+        .achievement-progress {
+            height: 6px;
+            background: #e0e0e0;
+            border-radius: 3px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: var(--active-tab-color);
+            border-radius: 3px;
+            transition: width 0.5s ease;
+        }
+        
+        .achievement-status {
+            text-align: right;
+            font-size: 13px;
+            font-weight: 500;
+            margin-top: 5px;
+            color: #777;
+        }
+        
+        .achievement-status.unlocked {
+            color: #27ae60;
+            font-weight: 700;
+        }
+        
+        .achievement-card.locked {
+            opacity: 0.7;
+            filter: grayscale(30%);
+        }
+        
+        .achievements-filter {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            background: rgba(var(--stats-bg-rgb), 0.8);
+            border: none;
+            border-radius: 20px;
+            padding: 8px 15px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .filter-btn.active {
+            background: var(--active-tab-color);
+            color: white;
+        }
+        
+        .achievements-summary {
+            display: flex;
+            justify-content: space-between;
+            background: rgba(var(--card-bg-rgb), 0.9);
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        
+        .summary-item {
+            text-align: center;
+        }
+        
+        .summary-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--section-title-color);
+        }
+        
+        .summary-label {
+            font-size: 14px;
+            color: #777;
+        }
     </style>
 </head>
 <body>
@@ -1379,6 +1865,8 @@
         <div class="tabs">
             <div class="tab active" data-tab="animals"><i class="fas fa-paw"></i> Животные</div>
             <div class="tab" data-tab="food"><i class="fas fa-utensils"></i> Магазин еды</div>
+            <div class="tab" data-tab="toys"><i class="fas fa-baseball-ball"></i> Игрушки</div>
+            <div class="tab" data-tab="exclusive"><i class="fas fa-crown"></i> Эксклюзивы</div>
             <div class="tab" data-tab="visitors"><i class="fas fa-users"></i> Посетители</div>
             <div class="tab" data-tab="games"><i class="fas fa-gamepad"></i> Игры</div>
         </div>
@@ -1411,11 +1899,72 @@
                 </div>
                 
                 <div class="section-title">
+                    <i class="fas fa-home"></i>Моя еда
+                </div>
+                <div class="my-section">
+                    <div class="items-list" id="food-list">
+                        <!-- Купленная еда будет здесь -->
+                    </div>
+                </div>
+                
+                <div class="section-title">
                     <i class="fas fa-info-circle"></i>Информация
                 </div>
                 <div class="visitors">
                     <p>Животные потребляют еду для поддержания здоровья и привлечения посетителей. При недостатке еды животные перестанут приносить доход.</p>
                     <p style="margin-top: 10px; color: #e74c3c; font-weight: 500;"><i class="fas fa-exclamation-triangle"></i> Текущее потребление: <span id="food-consumption">0</span> ед/мин</p>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="toys-tab">
+                <div class="section-title">
+                    <i class="fas fa-baseball-ball"></i>Магазин игрушек
+                </div>
+                <div class="toys-grid" id="toys-grid">
+                    <!-- Игрушки будут добавлены через JS -->
+                </div>
+                
+                <div class="section-title">
+                    <i class="fas fa-home"></i>Мои игрушки
+                </div>
+                <div class="my-section">
+                    <div class="items-list" id="toys-list">
+                        <!-- Купленные игрушки будут здесь -->
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="exclusive-tab">
+                <div class="section-title">
+                    <i class="fas fa-crown"></i>Эксклюзивные животные
+                </div>
+                <div class="exclusive-grid" id="exclusive-animals-grid">
+                    <!-- Эксклюзивные животные будут здесь -->
+                </div>
+                
+                <div class="section-title">
+                    <i class="fas fa-home"></i>Мои эксклюзивные животные
+                </div>
+                <div class="my-section">
+                    <div class="items-list" id="exclusive-animals-list">
+                        <!-- Купленные эксклюзивные животные -->
+                    </div>
+                </div>
+                
+                <div class="section-title">
+                    <i class="fas fa-crown"></i>Эксклюзивные игрушки
+                </div>
+                <div class="exclusive-grid" id="exclusive-toys-grid">
+                    <!-- Эксклюзивные игрушки будут здесь -->
+                </div>
+                
+                <div class="section-title">
+                    <i class="fas fa-home"></i>Мои эксклюзивные игрушки
+                </div>
+                <div class="my-section">
+                    <div class="items-list" id="exclusive-toys-list">
+                        <!-- Купленные эксклюзивные игрушки -->
+                    </div>
                 </div>
             </div>
             
@@ -1432,26 +1981,36 @@
                     </div>
                 </div>
                 
+                <!-- Раздел достижений -->
                 <div class="section-title">
                     <i class="fas fa-trophy"></i>Достижения
                 </div>
-                <div class="my-animals">
-                    <div style="display: flex; flex-direction: column; gap: 10px;">
-                        <div style="display: flex; align-items: center; gap: 10px;">
-                            <i class="fas fa-medal" style="color: #e6b800; font-size: 24px;"></i>
-                            <div>
-                                <div style="font-weight: 700;">Начальный уровень</div>
-                                <div style="font-size: 13px; color: #777;">Купите первое животное</div>
-                            </div>
-                        </div>
-                        <div style="display: flex; align-items: center; gap: 10px;">
-                            <i class="fas fa-medal" style="color: #c0c0c0; font-size: 24px;"></i>
-                            <div>
-                                <div style="font-weight: 700;">Любитель животных</div>
-                                <div style="font-size: 13px; color: #777;">Иметь 5 разных животных</div>
-                            </div>
-                        </div>
+                
+                <div class="achievements-summary">
+                    <div class="summary-item">
+                        <div class="summary-value" id="total-achievements">0</div>
+                        <div class="summary-label">Всего</div>
                     </div>
+                    <div class="summary-item">
+                        <div class="summary-value" id="unlocked-achievements">0</div>
+                        <div class="summary-label">Получено</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-value" id="progress-achievements">0%</div>
+                        <div class="summary-label">Прогресс</div>
+                    </div>
+                </div>
+                
+                <div class="achievements-filter" id="achievements-filter">
+                    <button class="filter-btn active" data-filter="all">Все</button>
+                    <button class="filter-btn" data-filter="bronze">Бронза</button>
+                    <button class="filter-btn" data-filter="silver">Серебро</button>
+                    <button class="filter-btn" data-filter="gold">Золото</button>
+                    <button class="filter-btn" data-filter="diamond">Алмазы</button>
+                </div>
+                
+                <div class="achievements-container" id="achievements-container">
+                    <!-- Достижения будут добавлены через JS -->
                 </div>
             </div>
             
@@ -1459,6 +2018,81 @@
             <div class="tab-content" id="games-tab">
                 <div class="section-title">
                     <i class="fas fa-gamepad"></i>Игровая зона
+                </div>
+                
+                <!-- НОВАЯ ИГРА: Уход за животными -->
+                <div class="game-container" id="animal-care-game">
+                    <div class="game-title">
+                        <i class="fas fa-heart"></i>Уход за животными
+                    </div>
+                    <div class="game-description">
+                        Ухаживай за животным! Корми, чисти и играй с ним, чтобы получить очки. За каждые 5 очков получай 1 монету.
+                    </div>
+                    <div class="game-board">
+                        <div class="animal-care-game">
+                            <div class="animal-display">
+                                <div class="animal-face">
+                                    <img id="animal-face-img" src="" alt="Animal">
+                                    <div class="animal-reaction" id="animal-reaction">😊</div>
+                                </div>
+                                <div class="animal-status" id="animal-status">Статус: Счастлив</div>
+                                <div class="stats-bars">
+                                    <div class="stat-bar">
+                                        <div class="stat-label">
+                                            <span class="stat-name">Голод</span>
+                                            <span class="stat-value" id="hunger-value">100%</span>
+                                        </div>
+                                        <div class="bar-container">
+                                            <div class="bar-fill hunger-bar" id="hunger-bar" style="width: 100%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="stat-bar">
+                                        <div class="stat-label">
+                                            <span class="stat-name">Чистота</span>
+                                            <span class="stat-value" id="clean-value">100%</span>
+                                        </div>
+                                        <div class="bar-container">
+                                            <div class="bar-fill clean-bar" id="clean-bar" style="width: 100%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="stat-bar">
+                                        <div class="stat-label">
+                                            <span class="stat-name">Настроение</span>
+                                            <span class="stat-value" id="mood-value">100%</span>
+                                        </div>
+                                        <div class="bar-container">
+                                            <div class="bar-fill mood-bar" id="mood-bar" style="width: 100%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="actions-container">
+                                <button class="action-btn" id="feed-btn">
+                                    <i class="fas fa-apple-alt"></i>
+                                    <span class="action-text">Покормить</span>
+                                </button>
+                                <button class="action-btn" id="clean-btn">
+                                    <i class="fas fa-shower"></i>
+                                    <span class="action-text">Почистить</span>
+                                </button>
+                                <button class="action-btn" id="play-btn">
+                                    <i class="fas fa-gamepad"></i>
+                                    <span class="action-text">Поиграть</span>
+                                </button>
+                            </div>
+                            <div class="care-score">Очки: <span id="care-score">0</span></div>
+                            <div class="care-timer" id="care-timer">01:00</div>
+                        </div>
+                    </div>
+                    <div class="game-controls">
+                        <button class="game-button" id="care-start">
+                            <i class="fas fa-play"></i>Начать игру
+                        </button>
+                    </div>
+                    <div class="game-cooldown" id="care-cooldown" style="display: none;">
+                        <div>Перезарядка</div>
+                        <div id="care-cooldown-timer">02:00</div>
+                    </div>
                 </div>
                 
                 <!-- Игра Парные карточки -->
@@ -1500,10 +2134,10 @@
                         <div class="snake-score">Очки: <span id="snake-score">0</span></div>
                         <!-- Добавляем кнопки управления для мобильных -->
                         <div class="snake-mobile-controls">
-                            <button class="snake-mobile-btn up">↑</button>
-                            <button class="snake-mobile-btn left">←</button>
-                            <button class="snake-mobile-btn down">↓</button>
-                            <button class="snake-mobile-btn right">→</button>
+                            <button class="snake-mobile-btn up">up</button>
+                            <button class="snake-mobile-btn left">left</button>
+                            <button class="snake-mobile-btn down">down</button>
+                            <button class="snake-mobile-btn right">right</button>
                         </div>
                     </div>
                     <div class="controls-hint">
@@ -1513,11 +2147,11 @@
                         <button class="game-button" id="snake-start">
                             <i class="fas fa-play"></i>Начать игру
                         </button>
-                        <div class="game-timer" id="snake-timer">03:00</div>
+                        <div class="game-timer" id="snake-timer">20:00</div>
                     </div>
                     <div class="game-cooldown" id="snake-cooldown" style="display: none;">
                         <div>Перезарядка</div>
-                        <div id="snake-cooldown-timer">03:00</div>
+                        <div id="snake-cooldown-timer">20:00</div>
                     </div>
                 </div>
                 
@@ -1546,7 +2180,7 @@
                     </div>
                 </div>
 
-                <!-- НОВАЯ ИГРА: Корми животных -->
+                <!-- Игра "Корми животных" -->
                 <div class="game-container" id="feeding-game">
                     <div class="game-title">
                         <i class="fas fa-utensils"></i>Корми животных
@@ -1621,16 +2255,45 @@
             { id: 'unicorn', name: 'Единорог', basePrice: 689655, income: 770, image: 'unicorn.gif', owned: 0, food: 77.0 },
             { id: 'drugon', name: 'Дракон', basePrice: 1000000, income: 1000, image: 'drugon.gif', owned: 0, food: 100.0 }
         ];
+
         
         const foods = [
-            { id: 'grass', name: 'Трава', basePrice: 160, amount: 2.8, image: 'grass.gif', effect: 'Для травоядных животных' },
-            { id: 'hay', name: 'Сено', basePrice: 205, amount: 3.4, image: 'seno.gif', effect: 'Для травоядных животных' },
-            { id: 'ant', name: 'Насекомые', basePrice: 270, amount: 4.0, image: 'ant.gif', effect: 'Для травоядных животных' },
-            { id: 'carrot', name: 'Морковь', basePrice: 350, amount: 4.8, image: 'morkov.gif', effect: 'Накормите кроликов' },
-            { id: 'fish', name: 'Рыба', basePrice: 455, amount: 5.8, image: 'fish.gif', effect: 'Кошки будут довольны' },
-            { id: 'meat', name: 'Мясо', basePrice: 590, amount: 6.9, image: 'meat.gif', effect: 'Для хищных животных' },
-            { id: 'fruit', name: 'Фрукты', basePrice: 770, amount: 8.3, image: 'banana.gif', effect: 'Витамины для всех' },
-            { id: 'premium', name: 'Премиум корм', basePrice: 1000, amount: 10.0, image: 'premi.gif', effect: 'Балдешь' }
+            { id: 'grass', name: 'Трава', basePrice: 160, amount: 2.8, image: 'grass.gif', effect: 'Для травоядных животных', owned: 0 },
+            { id: 'hay', name: 'Сено', basePrice: 205, amount: 3.4, image: 'seno.gif', effect: 'Для травоядных животных', owned: 0 },
+            { id: 'ant', name: 'Насекомые', basePrice: 270, amount: 4.0, image: 'ant.gif', effect: 'Для травоядных животных', owned: 0 },
+            { id: 'carrot', name: 'Морковь', basePrice: 350, amount: 4.8, image: 'morkov.gif', effect: 'Накормите кроликов', owned: 0 },
+            { id: 'fish', name: 'Рыба', basePrice: 455, amount: 5.8, image: 'fish.gif', effect: 'Кошки будут довольны', owned: 0 },
+            { id: 'meat', name: 'Мясо', basePrice: 590, amount: 6.9, image: 'meat.gif', effect: 'Для хищных животных', owned: 0 },
+            { id: 'fruit', name: 'Фрукты', basePrice: 770, amount: 8.3, image: 'banana.gif', effect: 'Витамины для всех', owned: 0 },
+            { id: 'premium', name: 'Премиум корм', basePrice: 1000, amount: 10.0, image: 'premi.gif', effect: 'Балдешь', owned: 0 }
+        ];
+        
+        // Новые эксклюзивные животные
+        const exclusiveAnimals = [
+            { id: 'mamont', name: 'Мамонт', basePrice: 2500000, income: 2500, image: 'mamont.gif', owned: 0, food: 150.0 },
+            { id: 'whole', name: 'Кит', basePrice: 1800000, income: 1800, image: 'whole.gif', owned: 0, food: 120.0 },
+            { id: 'kraken', name: 'Кракен', basePrice: 3200000, income: 3200, image: 'kraken.gif', owned: 0, food: 200.0 },
+            { id: 'trex', name: 'Тирекс', basePrice: 1500000, income: 1500, image: 'trex.gif', owned: 0, food: 100.0 },
+            { id: 'brahiozavr', name: 'Брахиозавр', basePrice: 2000000, income: 2000, image: 'brahiozavr.gif', owned: 0, food: 130.0 }
+        ];
+        
+        // Обычные игрушки
+        const toys = [
+            { id: 'ball', name: 'Мячик', basePrice: 100, happiness: 0.1, image: 'ball.gif', owned: 0 },
+            { id: 'bone', name: 'Кость', basePrice: 150, happiness: 0.15, image: 'bone.gif', owned: 0 },
+            { id: 'gazeta', name: 'Газета', basePrice: 200, happiness: 0.2, image: 'gazeta.gif', owned: 0 },
+            { id: 'truba', name: 'Труба', basePrice: 300, happiness: 0.25, image: 'truba.gif', owned: 0 },
+            { id: 'duck', name: 'Уточка', basePrice: 250, happiness: 0.22, image: 'duck.gif', owned: 0 },
+            { id: 'books', name: 'Книги', basePrice: 180, happiness: 0.18, image: 'books.gif', owned: 0 }
+        ];
+        
+        // Эксклюзивные игрушки
+        const exclusiveToys = [
+            { id: 'pepe', name: 'ПЕПЕ', basePrice: 5000, happiness: 1.0, image: 'pepe.gif', owned: 0 },
+            { id: 'diskoball', name: 'Дискошар', basePrice: 7500, happiness: 1.5, image: 'diskoball.gif', owned: 0 },
+            { id: 'pepeduck', name: 'Утка пепе', basePrice: 10000, happiness: 2.0, image: 'pepeduck.gif', owned: 0 },
+            { id: 'Yolka', name: 'Ёлка', basePrice: 12000, happiness: 2.5, image: 'Yolka.gif', owned: 0 },
+            { id: 'piano', name: 'Пианино', basePrice: 15000, happiness: 3.0, image: 'piano.gif', owned: 0 }
         ];
 
         // Гифки для игр (все доступные изображения)
@@ -1647,6 +2310,110 @@
             'lo_0l': { coins: 48, food: 84, used: false }
         };
         
+        // Система достижений
+        const achievements = [
+            // Бронзовые достижения (25)
+            { id: 'first_animal', name: 'Первое животное', description: 'Купи свое первое животное', type: 'bronze', reward: { coins: 50, food: 20 }, condition: (gameState) => gameState.animals.some(a => a.owned > 0) },
+            { id: 'first_food', name: 'Первый обед', description: 'Купи свою первую еду', type: 'bronze', reward: { coins: 30, food: 10 }, condition: (gameState) => gameState.foods.some(f => f.owned > 0) },
+            { id: 'first_toy', name: 'Первая игрушка', description: 'Купи свою первую игрушку', type: 'bronze', reward: { coins: 40, food: 5 }, condition: (gameState) => gameState.toys.some(t => t.owned > 0) },
+            { id: '100_coins', name: 'Сотня монет', description: 'Заработай 100 монет', type: 'bronze', reward: { coins: 20, food: 5 }, condition: (gameState) => gameState.coins >= 100 },
+            { id: '500_coins', name: 'Пять сотен', description: 'Заработай 500 монет', type: 'bronze', reward: { coins: 50, food: 10 }, condition: (gameState) => gameState.coins >= 500 },
+            { id: '100_food', name: 'Сто еды', description: 'Имей 100 единиц еды', type: 'bronze', reward: { coins: 30, food: 20 }, condition: (gameState) => gameState.food >= 100 },
+            { id: '5_animals', name: 'Маленький зоопарк', description: 'Имей 5 животных', type: 'bronze', reward: { coins: 40, food: 15 }, condition: (gameState) => gameState.animals.reduce((sum, a) => sum + a.owned, 0) >= 5 },
+            { id: '10_toys', name: 'Игрушечный магазин', description: 'Имей 10 игрушек', type: 'bronze', reward: { coins: 60, food: 5 }, condition: (gameState) => gameState.toys.reduce((sum, t) => sum + t.owned, 0) >= 10 },
+            { id: '100_visitors', name: 'Популярность', description: 'Прими 100 посетителей', type: 'bronze', reward: { coins: 50, food: 10 }, condition: (gameState) => gameState.totalVisitors >= 100 },
+            { id: '100_clicks', name: 'Энергичный', description: 'Нажми на кликер 100 раз', type: 'bronze', reward: { coins: 30, food: 5 }, condition: (gameState) => gameState.totalClicks >= 100 },
+            { id: 'first_game', name: 'Первая игра', description: 'Сыграй в любую игру', type: 'bronze', reward: { coins: 40, food: 10 }, condition: (gameState) => gameState.totalGamesPlayed > 0 },
+            { id: 'food_eater', name: 'Обжора', description: 'Животные съели 100 еды', type: 'bronze', reward: { coins: 50, food: 20 }, condition: (gameState) => gameState.totalFoodConsumed >= 100 },
+            { id: 'income_50', name: 'Стабильный доход', description: 'Зарабатывай 50 монет в минуту', type: 'bronze', reward: { coins: 30, food: 10 }, condition: (gameState) => gameState.income >= 50 },
+            { id: 'animal_variety', name: 'Разнообразие', description: 'Имей 5 разных животных', type: 'bronze', reward: { coins: 40, food: 15 }, condition: (gameState) => gameState.animals.filter(a => a.owned > 0).length >= 5 },
+            { id: 'first_exclusive', name: 'Эксклюзив', description: 'Купи эксклюзивное животное', type: 'bronze', reward: { coins: 100, food: 30 }, condition: (gameState) => gameState.exclusiveAnimals.some(a => a.owned > 0) },
+            { id: 'energy_100', name: 'Полная энергия', description: 'Имей 100 энергии', type: 'bronze', reward: { coins: 20, food: 5 }, condition: (gameState) => gameState.energy >= 100 },
+            { id: 'first_promo', name: 'Промоутер', description: 'Активируй промокод', type: 'bronze', reward: { coins: 30, food: 10 }, condition: (gameState) => gameState.usedPromoCodes.length > 0 },
+            { id: 'animal_lover', name: 'Любитель животных', description: 'Имей 10 животных', type: 'bronze', reward: { coins: 50, food: 20 }, condition: (gameState) => gameState.animals.reduce((sum, a) => sum + a.owned, 0) >= 10 },
+            { id: 'food_storage', name: 'Запасливый', description: 'Имей 200 еды', type: 'bronze', reward: { coins: 40, food: 30 }, condition: (gameState) => gameState.food >= 200 },
+            { id: 'toy_collector', name: 'Коллекционер', description: 'Имей 5 разных игрушек', type: 'bronze', reward: { coins: 60, food: 10 }, condition: (gameState) => gameState.toys.filter(t => t.owned > 0).length >= 5 },
+            { id: 'snake_100', name: 'Змеиный маг', description: 'Набери 100 очков в Змейке', type: 'bronze', reward: { coins: 50, food: 15 }, condition: (gameState) => gameState.highestSnakeScore >= 100 },
+            { id: 'memory_5', name: 'Память', description: 'Найди 5 пар в игре', type: 'bronze', reward: { coins: 40, food: 10 }, condition: (gameState) => gameState.highestMemoryPairs >= 5 },
+            { id: 'catch_20', name: 'Ловец', description: 'Поймай 20 животных', type: 'bronze', reward: { coins: 30, food: 5 }, condition: (gameState) => gameState.highestCatchScore >= 20 },
+            { id: 'feeding_10', name: 'Кормилец', description: 'Правильно накорми 10 животных', type: 'bronze', reward: { coins: 40, food: 15 }, condition: (gameState) => gameState.highestFeedingScore >= 10 },
+            { id: 'care_50', name: 'Заботливый', description: 'Набери 50 очков в Уходе за животными', type: 'bronze', reward: { coins: 50, food: 20 }, condition: (gameState) => gameState.highestCareScore >= 50 },
+            { id: 'all_bronze', name: 'Бронзовый чемпион', description: 'Получи все бронзовые достижения', type: 'bronze', reward: { coins: 100, food: 50 }, condition: (gameState) => gameState.achievementsUnlocked.filter(id => achievements.find(a => a.id === id)?.type === 'bronze').length >= 25 },
+            
+            // Серебряные достижения (25)
+            { id: '20_animals', name: 'Средний зоопарк', description: 'Имей 20 животных', type: 'silver', reward: { coins: 200, food: 50 }, condition: (gameState) => gameState.animals.reduce((sum, a) => sum + a.owned, 0) >= 20 },
+            { id: '500_food', name: 'Продовольственный запас', description: 'Имей 500 единиц еды', type: 'silver', reward: { coins: 100, food: 100 }, condition: (gameState) => gameState.food >= 500 },
+            { id: '1000_coins', name: 'Тысячник', description: 'Заработай 1000 монет', type: 'silver', reward: { coins: 150, food: 50 }, condition: (gameState) => gameState.coins >= 1000 },
+            { id: '500_visitors', name: 'Туристическое место', description: 'Прими 500 посетителей', type: 'silver', reward: { coins: 120, food: 30 }, condition: (gameState) => gameState.totalVisitors >= 500 },
+            { id: '500_clicks', name: 'Терпеливый', description: 'Нажми на кликер 500 раз', type: 'silver', reward: { coins: 100, food: 20 }, condition: (gameState) => gameState.totalClicks >= 500 },
+            { id: '10_games', name: 'Игроман', description: 'Сыграй 10 игр', type: 'silver', reward: { coins: 150, food: 30 }, condition: (gameState) => gameState.totalGamesPlayed >= 10 },
+            { id: '500_food_consumed', name: 'Прожорливые животные', description: 'Животные съели 500 еды', type: 'silver', reward: { coins: 120, food: 50 }, condition: (gameState) => gameState.totalFoodConsumed >= 500 },
+            { id: 'income_200', name: 'Хороший доход', description: 'Зарабатывай 200 монет в минуту', type: 'silver', reward: { coins: 100, food: 30 }, condition: (gameState) => gameState.income >= 200 },
+            { id: '10_animal_types', name: 'Разнообразие+', description: 'Имей 10 разных животных', type: 'silver', reward: { coins: 150, food: 40 }, condition: (gameState) => gameState.animals.filter(a => a.owned > 0).length >= 10 },
+            { id: '3_exclusives', name: 'Эксклюзивный коллектор', description: 'Купи 3 эксклюзивных животных', type: 'silver', reward: { coins: 300, food: 100 }, condition: (gameState) => gameState.exclusiveAnimals.reduce((sum, a) => sum + a.owned, 0) >= 3 },
+            { id: 'full_energy_50', name: 'Энергичный', description: 'Имей 100 энергии 50 раз', type: 'silver', reward: { coins: 80, food: 20 }, condition: (gameState) => gameState.fullEnergyCount >= 50 },
+            { id: '3_promos', name: 'Промо-мастер', description: 'Активируй 3 промокода', type: 'silver', reward: { coins: 100, food: 30 }, condition: (gameState) => gameState.usedPromoCodes.length >= 3 },
+            { id: '30_animals', name: 'Большой зоопарк', description: 'Имей 30 животных', type: 'silver', reward: { coins: 200, food: 60 }, condition: (gameState) => gameState.animals.reduce((sum, a) => sum + a.owned, 0) >= 30 },
+            { id: '1000_food', name: 'Продовольственный склад', description: 'Имей 1000 еды', type: 'silver', reward: { coins: 150, food: 200 }, condition: (gameState) => gameState.food >= 1000 },
+            { id: '10_toy_types', name: 'Игрушечный рай', description: 'Имей 10 разных игрушек', type: 'silver', reward: { coins: 200, food: 50 }, condition: (gameState) => gameState.toys.filter(t => t.owned > 0).length + gameState.exclusiveToys.filter(t => t.owned > 0).length >= 10 },
+            { id: 'snake_300', name: 'Змеиный король', description: 'Набери 300 очков в Змейке', type: 'silver', reward: { coins: 150, food: 40 }, condition: (gameState) => gameState.highestSnakeScore >= 300 },
+            { id: 'memory_15', name: 'Мастер памяти', description: 'Найди 15 пар в игре', type: 'silver', reward: { coins: 120, food: 30 }, condition: (gameState) => gameState.highestMemoryPairs >= 15 },
+            { id: 'catch_50', name: 'Охотник', description: 'Поймай 50 животных', type: 'silver', reward: { coins: 100, food: 20 }, condition: (gameState) => gameState.highestCatchScore >= 50 },
+            { id: 'feeding_30', name: 'Шеф-повар', description: 'Правильно накорми 30 животных', type: 'silver', reward: { coins: 120, food: 40 }, condition: (gameState) => gameState.highestFeedingScore >= 30 },
+            { id: 'care_100', name: 'Ветеринар', description: 'Набери 100 очков в Уходе за животными', type: 'silver', reward: { coins: 100, food: 30 }, condition: (gameState) => gameState.highestCareScore >= 100 },
+            { id: 'all_silver', name: 'Серебряный чемпион', description: 'Получи все серебряные достижения', type: 'silver', reward: { coins: 500, food: 200 }, condition: (gameState) => gameState.achievementsUnlocked.filter(id => achievements.find(a => a.id === id)?.type === 'silver').length >= 25 },
+            
+            // Золотые достижения (25)
+            { id: '50_animals', name: 'Огромный зоопарк', description: 'Имей 50 животных', type: 'gold', reward: { coins: 500, food: 200 }, condition: (gameState) => gameState.animals.reduce((sum, a) => sum + a.owned, 0) >= 50 },
+            { id: '5000_coins', name: 'Богач', description: 'Заработай 5000 монет', type: 'gold', reward: { coins: 300, food: 100 }, condition: (gameState) => gameState.coins >= 5000 },
+            { id: '2000_food', name: 'Продовольственная база', description: 'Имей 2000 единиц еды', type: 'gold', reward: { coins: 200, food: 300 }, condition: (gameState) => gameState.food >= 2000 },
+            { id: '2000_visitors', name: 'Туристическая мекка', description: 'Прими 2000 посетителей', type: 'gold', reward: { coins: 300, food: 100 }, condition: (gameState) => gameState.totalVisitors >= 2000 },
+            { id: '2000_clicks', name: 'Трудоголик', description: 'Нажми на кликер 2000 раз', type: 'gold', reward: { coins: 250, food: 50 }, condition: (gameState) => gameState.totalClicks >= 2000 },
+            { id: '50_games', name: 'Профессиональный игрок', description: 'Сыграй 50 игр', type: 'gold', reward: { coins: 300, food: 100 }, condition: (gameState) => gameState.totalGamesPlayed >= 50 },
+            { id: '2000_food_consumed', name: 'Ненасытные животные', description: 'Животные съели 2000 еды', type: 'gold', reward: { coins: 250, food: 200 }, condition: (gameState) => gameState.totalFoodConsumed >= 2000 },
+            { id: 'income_1000', name: 'Отличный доход', description: 'Зарабатывай 1000 монет в минуту', type: 'gold', reward: { coins: 300, food: 150 }, condition: (gameState) => gameState.income >= 1000 },
+            { id: '20_animal_types', name: 'Зоологический музей', description: 'Имей 20 разных животных', type: 'gold', reward: { coins: 400, food: 200 }, condition: (gameState) => gameState.animals.filter(a => a.owned > 0).length >= 20 },
+            { id: '5_exclusives', name: 'Эксклюзивный магнат', description: 'Купи 5 эксклюзивных животных', type: 'gold', reward: { coins: 1000, food: 500 }, condition: (gameState) => gameState.exclusiveAnimals.reduce((sum, a) => sum + a.owned, 0) >= 5 },
+            { id: 'full_energy_200', name: 'Неутомимый', description: 'Имей 100 энергии 200 раз', type: 'gold', reward: { coins: 200, food: 100 }, condition: (gameState) => gameState.fullEnergyCount >= 200 },
+            { id: 'all_promos', name: 'Промо-гений', description: 'Активируй все промокоды', type: 'gold', reward: { coins: 300, food: 100 }, condition: (gameState) => gameState.usedPromoCodes.length >= Object.keys(promoCodes).length },
+            { id: 'all_animals', name: 'Зоопарк мечты', description: 'Купи все обычные животные', type: 'gold', reward: { coins: 800, food: 300 }, condition: (gameState) => gameState.animals.every(a => a.owned > 0) },
+            { id: 'all_foods', name: 'Гурман', description: 'Купи все виды еды', type: 'gold', reward: { coins: 300, food: 500 }, condition: (gameState) => gameState.foods.every(f => f.owned > 0) },
+            { id: 'all_toys', name: 'Игрушечный король', description: 'Купи все обычные игрушки', type: 'gold', reward: { coins: 400, food: 200 }, condition: (gameState) => gameState.toys.every(t => t.owned > 0) },
+            { id: 'snake_500', name: 'Змеиный бог', description: 'Набери 500 очков в Змейке', type: 'gold', reward: { coins: 300, food: 100 }, condition: (gameState) => gameState.highestSnakeScore >= 500 },
+            { id: 'memory_all', name: 'Гений памяти', description: 'Найди все пары в игре', type: 'gold', reward: { coins: 250, food: 80 }, condition: (gameState) => gameState.highestMemoryPairs >= 18 },
+            { id: 'catch_100', name: 'Мастер охоты', description: 'Поймай 100 животных', type: 'gold', reward: { coins: 200, food: 50 }, condition: (gameState) => gameState.highestCatchScore >= 100 },
+            { id: 'feeding_50', name: 'Супер-повар', description: 'Правильно накорми 50 животных', type: 'gold', reward: { coins: 250, food: 100 }, condition: (gameState) => gameState.highestFeedingScore >= 50 },
+            { id: 'care_200', name: 'Зоотехник', description: 'Набери 200 очков в Уходе за животными', type: 'gold', reward: { coins: 250, food: 100 }, condition: (gameState) => gameState.highestCareScore >= 200 },
+            { id: 'all_gold', name: 'Золотой чемпион', description: 'Получи все золотые достижения', type: 'gold', reward: { coins: 2000, food: 1000 }, condition: (gameState) => gameState.achievementsUnlocked.filter(id => achievements.find(a => a.id === id)?.type === 'gold').length >= 25 },
+            
+            // Алмазные достижения (25)
+            { id: '100_animals', name: 'Гигантский зоопарк', description: 'Имей 100 животных', type: 'diamond', reward: { coins: 2000, food: 1000 }, condition: (gameState) => gameState.animals.reduce((sum, a) => sum + a.owned, 0) >= 100 },
+            { id: '10000_coins', name: 'Миллионер', description: 'Заработай 10000 монет', type: 'diamond', reward: { coins: 1000, food: 500 }, condition: (gameState) => gameState.coins >= 10000 },
+            { id: '5000_food', name: 'Продовольственная империя', description: 'Имей 5000 единиц еды', type: 'diamond', reward: { coins: 500, food: 2000 }, condition: (gameState) => gameState.food >= 5000 },
+            { id: '5000_visitors', name: 'Мировая достопримечательность', description: 'Прими 5000 посетителей', type: 'diamond', reward: { coins: 800, food: 300 }, condition: (gameState) => gameState.totalVisitors >= 5000 },
+            { id: '5000_clicks', name: 'Железные пальцы', description: 'Нажми на кликер 5000 раз', type: 'diamond', reward: { coins: 600, food: 200 }, condition: (gameState) => gameState.totalClicks >= 5000 },
+            { id: '100_games', name: 'Легенда игр', description: 'Сыграй 100 игр', type: 'diamond', reward: { coins: 800, food: 300 }, condition: (gameState) => gameState.totalGamesPlayed >= 100 },
+            { id: '5000_food_consumed', name: 'Бездонные желудки', description: 'Животные съели 5000 еды', type: 'diamond', reward: { coins: 600, food: 500 }, condition: (gameState) => gameState.totalFoodConsumed >= 5000 },
+            { id: 'income_5000', name: 'Бизнес-магнат', description: 'Зарабатывай 5000 монет в минуту', type: 'diamond', reward: { coins: 1000, food: 500 }, condition: (gameState) => gameState.income >= 5000 },
+            { id: 'all_animal_types', name: 'Полная коллекция', description: 'Имей все виды животных', type: 'diamond', reward: { coins: 1500, food: 800 }, condition: (gameState) => gameState.animals.every(a => a.owned > 0) && gameState.exclusiveAnimals.every(a => a.owned > 0) },
+            { id: '10_exclusives', name: 'Эксклюзивный император', description: 'Купи 10 эксклюзивных животных', type: 'diamond', reward: { coins: 3000, food: 1500 }, condition: (gameState) => gameState.exclusiveAnimals.reduce((sum, a) => sum + a.owned, 0) >= 10 },
+            { id: 'full_energy_500', name: 'Неиссякаемый источник', description: 'Имей 100 энергии 500 раз', type: 'diamond', reward: { coins: 500, food: 300 }, condition: (gameState) => gameState.fullEnergyCount >= 500 },
+            { id: 'max_happiness', name: 'Счастливые животные', description: 'Добейтесь максимального счастья', type: 'diamond', reward: { coins: 1000, food: 500 }, condition: (gameState) => gameState.happiness >= 10 },
+            { id: 'all_items', name: 'Абсолютный коллектор', description: 'Купи все предметы в игре', type: 'diamond', reward: { coins: 3000, food: 2000 }, condition: (gameState) => 
+                gameState.animals.every(a => a.owned > 0) && 
+                gameState.foods.every(f => f.owned > 0) && 
+                gameState.toys.every(t => t.owned > 0) && 
+                gameState.exclusiveAnimals.every(a => a.owned > 0) && 
+                gameState.exclusiveToys.every(t => t.owned > 0) 
+            },
+            { id: 'snake_1000', name: 'Легенда Змейки', description: 'Набери 1000 очков в Змейке', type: 'diamond', reward: { coins: 800, food: 300 }, condition: (gameState) => gameState.highestSnakeScore >= 1000 },
+            { id: 'memory_perfect', name: 'Идеальная память', description: 'Найди все пары за минимальное время', type: 'diamond', reward: { coins: 600, food: 200 }, condition: (gameState) => gameState.bestMemoryTime <= 60 && gameState.highestMemoryPairs >= 18 },
+            { id: 'catch_200', name: 'Великий охотник', description: 'Поймай 200 животных', type: 'diamond', reward: { coins: 500, food: 150 }, condition: (gameState) => gameState.highestCatchScore >= 200 },
+            { id: 'feeding_100', name: 'Великий шеф-повар', description: 'Правильно накорми 100 животных', type: 'diamond', reward: { coins: 600, food: 300 }, condition: (gameState) => gameState.highestFeedingScore >= 100 },
+            { id: 'care_300', name: 'Профессор зоологии', description: 'Набери 300 очков в Уходе за животными', type: 'diamond', reward: { coins: 600, food: 300 }, condition: (gameState) => gameState.highestCareScore >= 300 },
+            { id: 'all_achievements', name: 'ПОБЕДА', description: 'Получи все достижения', type: 'diamond', reward: { coins: 10000, food: 5000 }, condition: (gameState) => gameState.achievementsUnlocked.length >= achievements.length }
+        ];
+        
         // Состояние игры
         let gameState = {
             coins: 100,
@@ -1656,19 +2423,35 @@
             lastUpdate: Date.now(),
             animals: JSON.parse(JSON.stringify(animals)),
             foods: JSON.parse(JSON.stringify(foods)),
+            toys: JSON.parse(JSON.stringify(toys)),
+            exclusiveAnimals: JSON.parse(JSON.stringify(exclusiveAnimals)),
+            exclusiveToys: JSON.parse(JSON.stringify(exclusiveToys)),
             visitors: 0,
             totalVisitors: 0,
             income: 0,
             theme: 'dark-red',
             tab: 'animals',
             lastActiveTime: Date.now(),
+            happiness: 1.0, // Множитель счастья от игрушек
             games: {
                 memory: { active: false, cards: [], flippedCards: [], matchedPairs: 0, moves: 0 },
                 snake: { active: false, cooldown: 0, score: 0 },
                 catch: { active: false, cooldown: 0, score: 0 },
-                feeding: { active: false, cooldown: 0, score: 0 } // Новая игра
+                feeding: { active: false, cooldown: 0, score: 0 },
+                care: { active: false, cooldown: 0, score: 0 }
             },
-            usedPromoCodes: []
+            usedPromoCodes: [],
+            achievementsUnlocked: [],
+            totalClicks: 0,
+            totalGamesPlayed: 0,
+            totalFoodConsumed: 0,
+            fullEnergyCount: 0,
+            highestSnakeScore: 0,
+            highestMemoryPairs: 0,
+            highestCatchScore: 0,
+            highestFeedingScore: 0,
+            highestCareScore: 0,
+            bestMemoryTime: 9999
         };
         
         // Элементы DOM
@@ -1678,7 +2461,14 @@
         const energyBarEl = document.getElementById('energy-bar');
         const animalsGridEl = document.getElementById('animals-grid');
         const foodGridEl = document.getElementById('food-grid');
+        const toysGridEl = document.getElementById('toys-grid');
+        const exclusiveAnimalsGridEl = document.getElementById('exclusive-animals-grid');
+        const exclusiveToysGridEl = document.getElementById('exclusive-toys-grid');
         const animalListEl = document.getElementById('animal-list');
+        const foodListEl = document.getElementById('food-list');
+        const toysListEl = document.getElementById('toys-list');
+        const exclusiveAnimalsListEl = document.getElementById('exclusive-animals-list');
+        const exclusiveToysListEl = document.getElementById('exclusive-toys-list');
         const visitorCountEl = document.getElementById('visitor-count');
         const totalVisitorsEl = document.getElementById('total-visitors');
         const visitorsContainerEl = document.getElementById('visitors-container');
@@ -1687,6 +2477,8 @@
         const tabContents = {
             'animals': document.getElementById('animals-tab'),
             'food': document.getElementById('food-tab'),
+            'toys': document.getElementById('toys-tab'),
+            'exclusive': document.getElementById('exclusive-tab'),
             'visitors': document.getElementById('visitors-tab'),
             'games': document.getElementById('games-tab')
         };
@@ -1738,16 +2530,46 @@
         const promoSubmit = document.getElementById('promoSubmit');
         const promoClose = document.getElementById('promoClose');
         
+        // Элементы для достижений
+        const achievementsContainer = document.getElementById('achievements-container');
+        const achievementsFilter = document.getElementById('achievements-filter');
+        const totalAchievementsEl = document.getElementById('total-achievements');
+        const unlockedAchievementsEl = document.getElementById('unlocked-achievements');
+        const progressAchievementsEl = document.getElementById('progress-achievements');
+        
+        // Элементы для НОВОЙ ИГРЫ "Уход за животными"
+        const animalFaceImg = document.getElementById('animal-face-img');
+        const animalStatusEl = document.getElementById('animal-status');
+        const hungerValueEl = document.getElementById('hunger-value');
+        const hungerBarEl = document.getElementById('hunger-bar');
+        const cleanValueEl = document.getElementById('clean-value');
+        const cleanBarEl = document.getElementById('clean-bar');
+        const moodValueEl = document.getElementById('mood-value');
+        const moodBarEl = document.getElementById('mood-bar');
+        const feedBtn = document.getElementById('feed-btn');
+        const cleanBtn = document.getElementById('clean-btn');
+        const playBtn = document.getElementById('play-btn');
+        const careScoreEl = document.getElementById('care-score');
+        const careTimerEl = document.getElementById('care-timer');
+        const careStartBtn = document.getElementById('care-start');
+        const careCooldownEl = document.getElementById('care-cooldown');
+        const careCooldownTimer = document.getElementById('care-cooldown-timer');
+        const animalReactionEl = document.getElementById('animal-reaction');
+        
         // Инициализация игры
         function initGame() {
             loadGame();
             applyTheme();
             renderAnimals();
             renderFood();
+            renderToys();
+            renderExclusiveAnimals();
+            renderExclusiveToys();
             updateUI();
             setupTabs();
             setupEventListeners();
             initGames();
+            renderAchievements(); // Инициализация достижений
             
             // Запускаем игровые процессы
             setInterval(updateIncome, 1000);
@@ -1768,7 +2590,8 @@
             setupMemoryGame();
             setupSnakeGame();
             setupCatchGame();
-            setupFeedingGame(); // Инициализация новой игры
+            setupFeedingGame();
+            setupAnimalCareGame(); // Инициализация новой игры
         }
         
         // Рассчитать общее количество животных
@@ -1837,6 +2660,15 @@
                     activatePromoCode();
                 }
             });
+            
+            // Обработчики фильтра достижений
+            achievementsFilter.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    achievementsFilter.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    renderAchievements();
+                });
+            });
         }
         
         // Активация промокода
@@ -1868,6 +2700,7 @@
                 promoModal.classList.remove('active');
                 promoInput.value = '';
                 updateUI();
+                checkAchievements();
             } else {
                 showNotification('Неверный промокод', 'error');
             }
@@ -1878,6 +2711,7 @@
             if (gameState.energy > 0) {
                 gameState.coins += 1;
                 gameState.energy -= 1;
+                gameState.totalClicks++;
                 
                 createCoinAnimation();
                 
@@ -1887,6 +2721,7 @@
                 }, 300);
                 
                 updateUI();
+                checkAchievements();
             } else {
                 showNotification("Недостаточно энергии!", "error");
             }
@@ -1924,6 +2759,11 @@
                 gameState.energy += 1;
                 updateUI();
             }
+            
+            if (gameState.energy === gameState.maxEnergy) {
+                gameState.fullEnergyCount++;
+                checkAchievements();
+            }
         }
         
         // Настройка вкладок
@@ -1938,12 +2778,18 @@
                     tab.classList.add('active');
                     tabContents[tabId].classList.add('active');
                     gameState.tab = tabId;
+
+                    // При переключении на вкладку достижений обновляем их
+                    if (tabId === 'visitors') {
+                        renderAchievements();
+                    }
                 });
             });
         }
         
         // Отрисовка животных в магазине
         function renderAnimals() {
+            if (!animalsGridEl) return;
             animalsGridEl.innerHTML = '';
             
             const totalAnimals = getTotalAnimals();
@@ -1989,7 +2835,7 @@
                 btn.addEventListener('click', (e) => {
                     const animalId = e.target.dataset.id;
                     const input = document.querySelector(`.quantity-input[data-id="${animalId}"]`);
-                    if (input.value > 1) input.value = parseInt(input.value) - 1;
+                    if (input && input.value > 1) input.value = parseInt(input.value) - 1;
                 });
             });
             
@@ -1997,7 +2843,7 @@
                 btn.addEventListener('click', (e) => {
                     const animalId = e.target.dataset.id;
                     const input = document.querySelector(`.quantity-input[data-id="${animalId}"]`);
-                    if (input.value < 10) input.value = parseInt(input.value) + 1;
+                    if (input && input.value < 10) input.value = parseInt(input.value) + 1;
                 });
             });
             
@@ -2006,7 +2852,7 @@
                 button.addEventListener('click', (e) => {
                     const animalId = e.target.dataset.id;
                     const input = document.querySelector(`.quantity-input[data-id="${animalId}"]`);
-                    const quantity = parseInt(input.value) || 1;
+                    const quantity = input ? parseInt(input.value) || 1 : 1;
                     buyAnimal(animalId, quantity);
                 });
             });
@@ -2014,6 +2860,7 @@
         
         // Отрисовка еды в магазине
         function renderFood() {
+            if (!foodGridEl) return;
             foodGridEl.innerHTML = '';
             
             gameState.foods.forEach(food => {
@@ -2034,6 +2881,11 @@
                         <div class="food-effect">
                             <i class="fas fa-star"></i> ${food.effect}
                         </div>
+                        <div class="buy-controls">
+                            <button class="quantity-btn minus" data-id="${food.id}">-</button>
+                            <input type="number" class="quantity-input" value="1" min="1" max="100" data-id="${food.id}">
+                            <button class="quantity-btn plus" data-id="${food.id}">+</button>
+                        </div>
                         <button class="buy-button" ${canBuy ? '' : 'disabled'} 
                                 data-id="${food.id}">
                             Купить <i class="fas fa-shopping-cart"></i>
@@ -2044,54 +2896,360 @@
                 foodGridEl.appendChild(foodCard);
             });
             
+            // Обработчики кнопок количества
+            document.querySelectorAll('.quantity-btn.minus').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const foodId = e.target.dataset.id;
+                    const input = document.querySelector(`.quantity-input[data-id="${foodId}"]`);
+                    if (input && input.value > 1) input.value = parseInt(input.value) - 1;
+                });
+            });
+            
+            document.querySelectorAll('.quantity-btn.plus').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const foodId = e.target.dataset.id;
+                    const input = document.querySelector(`.quantity-input[data-id="${foodId}"]`);
+                    if (input && input.value < 100) input.value = parseInt(input.value) + 1;
+                });
+            });
+            
             // Обработчики кнопок покупки еды
             document.querySelectorAll('.buy-button').forEach(button => {
                 button.addEventListener('click', (e) => {
                     const foodId = e.target.dataset.id;
-                    buyFood(foodId);
+                    const input = document.querySelector(`.quantity-input[data-id="${foodId}"]`);
+                    const quantity = input ? parseInt(input.value) || 1 : 1;
+                    buyFood(foodId, quantity);
+                });
+            });
+        }
+        
+        // Отрисовка игрушек
+        function renderToys() {
+            if (!toysGridEl) return;
+            toysGridEl.innerHTML = '';
+            
+            gameState.toys.forEach(toy => {
+                const canBuy = gameState.coins >= toy.basePrice;
+                
+                const toyCard = document.createElement('div');
+                toyCard.className = 'toy-card';
+                toyCard.innerHTML = `
+                    <div class="toy-image">
+                        <img src="${toy.image}" alt="${toy.name}">
+                    </div>
+                    <div class="toy-info">
+                        <div class="toy-name">${toy.name}</div>
+                        <div class="toy-price">${toy.basePrice} <i class="fas fa-coins"></i></div>
+                        <div style="font-size: 12px; color: #777; margin-bottom: 8px;">
+                            Счастье: +${toy.happiness * 100}%
+                        </div>
+                        <div class="buy-controls">
+                            <button class="quantity-btn minus" data-id="${toy.id}">-</button>
+                            <input type="number" class="quantity-input" value="1" min="1" max="100" data-id="${toy.id}">
+                            <button class="quantity-btn plus" data-id="${toy.id}">+</button>
+                        </div>
+                        <button class="buy-button" ${canBuy ? '' : 'disabled'} 
+                                data-id="${toy.id}">
+                            Купить <i class="fas fa-shopping-cart"></i>
+                        </button>
+                    </div>
+                `;
+                
+                toysGridEl.appendChild(toyCard);
+            });
+            
+            // Обработчики кнопок количества
+            document.querySelectorAll('.quantity-btn.minus').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const toyId = e.target.dataset.id;
+                    const input = document.querySelector(`.quantity-input[data-id="${toyId}"]`);
+                    if (input && input.value > 1) input.value = parseInt(input.value) - 1;
+                });
+            });
+            
+            document.querySelectorAll('.quantity-btn.plus').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const toyId = e.target.dataset.id;
+                    const input = document.querySelector(`.quantity-input[data-id="${toyId}"]`);
+                    if (input && input.value < 100) input.value = parseInt(input.value) + 1;
+                });
+            });
+            
+            // Обработчики кнопок покупки игрушек
+            document.querySelectorAll('.buy-button').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const toyId = e.target.dataset.id;
+                    const input = document.querySelector(`.quantity-input[data-id="${toyId}"]`);
+                    const quantity = input ? parseInt(input.value) || 1 : 1;
+                    buyToy(toyId, quantity);
+                });
+            });
+        }
+        
+        // Отрисовка эксклюзивных животных
+        function renderExclusiveAnimals() {
+            if (!exclusiveAnimalsGridEl) return;
+            exclusiveAnimalsGridEl.innerHTML = '';
+            
+            gameState.exclusiveAnimals.forEach(animal => {
+                const canBuy = gameState.coins >= animal.basePrice;
+                
+                const animalCard = document.createElement('div');
+                animalCard.className = 'exclusive-card';
+                animalCard.innerHTML = `
+                    <div class="exclusive-image">
+                        <img src="${animal.image}" alt="${animal.name}">
+                    </div>
+                    <div class="exclusive-info">
+                        <div class="exclusive-name">
+                            ${animal.name}
+                            <span class="exclusive-price" data-id="${animal.id}">${animal.basePrice} <i class="fas fa-coins"></i></span>
+                        </div>
+                        <div style="font-size: 12px; color: #ccc; margin-bottom: 8px;">
+                            Доход: ${animal.income} мон/животное | Еда: ${animal.food}/мин
+                        </div>
+                        
+                        <div class="buy-controls">
+                            <button class="quantity-btn minus" data-id="${animal.id}">-</button>
+                            <input type="number" class="quantity-input" value="1" min="1" max="10000" data-id="${animal.id}">
+                            <button class="quantity-btn plus" data-id="${animal.id}">+</button>
+                        </div>
+                        
+                        <button class="buy-button" ${canBuy ? '' : 'disabled'} 
+                                data-id="${animal.id}">
+                            Купить <i class="fas fa-shopping-cart"></i>
+                        </button>
+                    </div>
+                `;
+                
+                exclusiveAnimalsGridEl.appendChild(animalCard);
+            });
+            
+            // Обработчики кнопок количества
+            document.querySelectorAll('.quantity-btn.minus').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const animalId = e.target.dataset.id;
+                    const input = document.querySelector(`.quantity-input[data-id="${animalId}"]`);
+                    if (input && input.value > 1) input.value = parseInt(input.value) - 1;
+                });
+            });
+            
+            document.querySelectorAll('.quantity-btn.plus').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const animalId = e.target.dataset.id;
+                    const input = document.querySelector(`.quantity-input[data-id="${animalId}"]`);
+                    if (input && input.value < 10) input.value = parseInt(input.value) + 1;
+                });
+            });
+            
+            // Обработчики кнопок покупки эксклюзивных животных
+            document.querySelectorAll('.buy-button').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const animalId = e.target.dataset.id;
+                    const input = document.querySelector(`.quantity-input[data-id="${animalId}"]`);
+                    const quantity = input ? parseInt(input.value) || 1 : 1;
+                    buyExclusiveAnimal(animalId, quantity);
+                });
+            });
+        }
+        
+        // Отрисовка эксклюзивных игрушек
+        function renderExclusiveToys() {
+            if (!exclusiveToysGridEl) return;
+            exclusiveToysGridEl.innerHTML = '';
+            
+            gameState.exclusiveToys.forEach(toy => {
+                const canBuy = gameState.coins >= toy.basePrice;
+                
+                const toyCard = document.createElement('div');
+                toyCard.className = 'exclusive-card';
+                toyCard.innerHTML = `
+                    <div class="exclusive-image">
+                        <img src="${toy.image}" alt="${toy.name}">
+                    </div>
+                    <div class="exclusive-info">
+                        <div class="exclusive-name">${toy.name}</div>
+                        <div class="exclusive-price">${toy.basePrice} <i class="fas fa-coins"></i></div>
+                        <div style="font-size: 12px; color: #ccc; margin-bottom: 8px;">
+                            Счастье: +${toy.happiness * 100}%
+                        </div>
+                        <div class="buy-controls">
+                            <button class="quantity-btn minus" data-id="${toy.id}">-</button>
+                            <input type="number" class="quantity-input" value="1" min="1" max="100" data-id="${toy.id}">
+                            <button class="quantity-btn plus" data-id="${toy.id}">+</button>
+                        </div>
+                        <button class="buy-button" ${canBuy ? '' : 'disabled'} 
+                                data-id="${toy.id}">
+                            Купить <i class="fas fa-shopping-cart"></i>
+                        </button>
+                    </div>
+                `;
+                
+                exclusiveToysGridEl.appendChild(toyCard);
+            });
+            
+            // Обработчики кнопок количества
+            document.querySelectorAll('.quantity-btn.minus').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const toyId = e.target.dataset.id;
+                    const input = document.querySelector(`.quantity-input[data-id="${toyId}"]`);
+                    if (input && input.value > 1) input.value = parseInt(input.value) - 1;
+                });
+            });
+            
+            document.querySelectorAll('.quantity-btn.plus').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const toyId = e.target.dataset.id;
+                    const input = document.querySelector(`.quantity-input[data-id="${toyId}"]`);
+                    if (input && input.value < 100) input.value = parseInt(input.value) + 1;
+                });
+            });
+            
+            // Обработчики кнопок покупки эксклюзивных игрушек
+            document.querySelectorAll('.buy-button').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const toyId = e.target.dataset.id;
+                    const input = document.querySelector(`.quantity-input[data-id="${toyId}"]`);
+                    const quantity = input ? parseInt(input.value) || 1 : 1;
+                    buyExclusiveToy(toyId, quantity);
                 });
             });
         }
         
         // Обновление интерфейса
         function updateUI() {
-            coinsEl.textContent = Math.floor(gameState.coins);
-            foodEl.textContent = Math.floor(gameState.food);
-            energyEl.textContent = Math.floor(gameState.energy);
+            if (coinsEl) coinsEl.textContent = Math.floor(gameState.coins);
+            if (foodEl) foodEl.textContent = Math.floor(gameState.food);
+            if (energyEl) energyEl.textContent = Math.floor(gameState.energy);
             
-            const energyPercent = (gameState.energy / gameState.maxEnergy) * 100;
-            energyBarEl.style.width = `${energyPercent}%`;
+            if (energyBarEl) {
+                const energyPercent = (gameState.energy / gameState.maxEnergy) * 100;
+                energyBarEl.style.width = `${energyPercent}%`;
+            }
             
-            animalListEl.innerHTML = '';
+            // Обновляем список животных
+            if (animalListEl) {
+                animalListEl.innerHTML = '';
+                gameState.animals.forEach(animal => {
+                    if (animal.owned > 0) {
+                        const animalItem = document.createElement('div');
+                        animalItem.className = 'animal-item';
+                        animalItem.innerHTML = `
+                            <div class="animal-item-icon">
+                                <img src="${animal.image}" alt="${animal.name}">
+                            </div>
+                            <div class="animal-item-count">${animal.owned}</div>
+                            <div style="font-size: 11px; color: #777; margin-top: 5px;">
+                                ${animal.income * animal.owned}/животное
+                            </div>
+                        `;
+                        animalListEl.appendChild(animalItem);
+                    }
+                });
+            }
             
-            gameState.animals.forEach(animal => {
-                if (animal.owned > 0) {
-                    const animalItem = document.createElement('div');
-                    animalItem.className = 'animal-item';
-                    animalItem.innerHTML = `
-                        <div class="animal-item-icon">
-                            <img src="${animal.image}" alt="${animal.name}">
-                        </div>
-                        <div class="animal-item-count">${animal.owned}</div>
-                        <div style="font-size: 11px; color: #777; margin-top: 5px;">
-                            ${animal.income * animal.owned}/животное
-                        </div>
-                    `;
-                    animalListEl.appendChild(animalItem);
-                }
-            });
+            // Обновляем список еды
+            if (foodListEl) {
+                foodListEl.innerHTML = '';
+                gameState.foods.forEach(food => {
+                    if (food.owned > 0) {
+                        const foodItem = document.createElement('div');
+                        foodItem.className = 'item-card';
+                        foodItem.innerHTML = `
+                            <div class="item-icon">
+                                <img src="${food.image}" alt="${food.name}">
+                            </div>
+                            <div class="item-count">${food.owned}</div>
+                            <div style="font-size: 11px; color: #777; margin-top: 5px;">
+                                ${food.amount * food.owned} ед.
+                            </div>
+                        `;
+                        foodListEl.appendChild(foodItem);
+                    }
+                });
+            }
             
-            visitorCountEl.textContent = gameState.visitors;
-            totalVisitorsEl.textContent = gameState.totalVisitors;
+            // Обновляем список игрушек
+            if (toysListEl) {
+                toysListEl.innerHTML = '';
+                gameState.toys.forEach(toy => {
+                    if (toy.owned > 0) {
+                        const toyItem = document.createElement('div');
+                        toyItem.className = 'item-card';
+                        toyItem.innerHTML = `
+                            <div class="item-icon">
+                                <img src="${toy.image}" alt="${toy.name}">
+                            </div>
+                            <div class="item-count">${toy.owned}</div>
+                            <div style="font-size: 11px; color: #777; margin-top: 5px;">
+                                +${toy.happiness * 100}%
+                            </div>
+                        `;
+                        toysListEl.appendChild(toyItem);
+                    }
+                });
+            }
             
-            const baseIncome = gameState.animals.reduce((sum, animal) => {
-                return sum + (animal.income * animal.owned);
-            }, 0);
+            // Обновляем список эксклюзивных животных
+            if (exclusiveAnimalsListEl) {
+                exclusiveAnimalsListEl.innerHTML = '';
+                gameState.exclusiveAnimals.forEach(animal => {
+                    if (animal.owned > 0) {
+                        const animalItem = document.createElement('div');
+                        animalItem.className = 'item-card exclusive-item';
+                        animalItem.innerHTML = `
+                            <div class="item-icon">
+                                <img src="${animal.image}" alt="${animal.name}">
+                            </div>
+                            <div class="item-count">${animal.owned}</div>
+                            <div style="font-size: 11px; color: #ccc; margin-top: 5px;">
+                                ${animal.income * animal.owned}/животное
+                            </div>
+                        `;
+                        exclusiveAnimalsListEl.appendChild(animalItem);
+                    }
+                });
+            }
             
-            const incomePerMinute = baseIncome * gameState.visitors;
-            incomePerMinuteEl.textContent = incomePerMinute;
+            // Обновляем список эксклюзивных игрушек
+            if (exclusiveToysListEl) {
+                exclusiveToysListEl.innerHTML = '';
+                gameState.exclusiveToys.forEach(toy => {
+                    if (toy.owned > 0) {
+                        const toyItem = document.createElement('div');
+                        toyItem.className = 'item-card exclusive-item';
+                        toyItem.innerHTML = `
+                            <div class="item-icon">
+                                <img src="${toy.image}" alt="${toy.name}">
+                            </div>
+                            <div class="item-count">${toy.owned}</div>
+                            <div style="font-size: 11px; color: #ccc; margin-top: 5px;">
+                                +${toy.happiness * 100}%
+                            </div>
+                        `;
+                        exclusiveToysListEl.appendChild(toyItem);
+                    }
+                });
+            }
             
-            gameState.income = baseIncome;
+            if (visitorCountEl) visitorCountEl.textContent = gameState.visitors;
+            if (totalVisitorsEl) totalVisitorsEl.textContent = gameState.totalVisitors;
+            
+            if (incomePerMinuteEl) {
+                const baseIncome = gameState.animals.reduce((sum, animal) => {
+                    return sum + (animal.income * animal.owned);
+                }, 0);
+                
+                const exclusiveIncome = gameState.exclusiveAnimals.reduce((sum, animal) => {
+                    return sum + (animal.income * animal.owned);
+                }, 0);
+                
+                const incomePerMinute = (baseIncome + exclusiveIncome) * gameState.visitors * gameState.happiness;
+                incomePerMinuteEl.textContent = incomePerMinute;
+                
+                gameState.income = baseIncome + exclusiveIncome;
+            }
             
             updateBuyButtons();
         }
@@ -2104,12 +3262,21 @@
                 const itemId = button.dataset.id;
                 const animal = gameState.animals.find(a => a.id === itemId);
                 const food = gameState.foods.find(f => f.id === itemId);
+                const toy = gameState.toys.find(t => t.id === itemId);
+                const exclusiveAnimal = gameState.exclusiveAnimals.find(a => a.id === itemId);
+                const exclusiveToy = gameState.exclusiveToys.find(t => t.id === itemId);
                 
                 if (animal) {
                     const price = calculatePrice(animal.basePrice, animal.owned, totalAnimals);
                     button.disabled = gameState.coins < price;
                 } else if (food) {
                     button.disabled = gameState.coins < food.basePrice;
+                } else if (toy) {
+                    button.disabled = gameState.coins < toy.basePrice;
+                } else if (exclusiveAnimal) {
+                    button.disabled = gameState.coins < exclusiveAnimal.basePrice;
+                } else if (exclusiveToy) {
+                    button.disabled = gameState.coins < exclusiveToy.basePrice;
                 }
             });
         }
@@ -2118,8 +3285,78 @@
         function buyAnimal(animalId, quantity) {
             const animal = gameState.animals.find(a => a.id === animalId);
             const totalAnimals = getTotalAnimals();
-            const currentPrice = calculatePrice(animal.basePrice, animal.owned, totalAnimals);
-            const totalPrice = currentPrice * quantity;
+            let totalPrice = 0;
+            let actualQuantity = 0;
+            
+            // Рассчитываем общую стоимость с учетом инфляции для каждого животного
+            for (let i = 0; i < quantity; i++) {
+                const currentPrice = calculatePrice(animal.basePrice, animal.owned + i, totalAnimals + i);
+                if (gameState.coins >= totalPrice + currentPrice) {
+                    totalPrice += currentPrice;
+                    actualQuantity++;
+                } else {
+                    break;
+                }
+            }
+            
+            if (actualQuantity > 0) {
+                gameState.coins -= totalPrice;
+                animal.owned += actualQuantity;
+                
+                createCoinAnimation();
+                
+                showNotification(`Вы купили ${actualQuantity} ${animal.name.toLowerCase()}!`);
+                
+                updateUI();
+                renderAnimals();
+                checkAchievements();
+            } else {
+                showNotification(`Недостаточно монет для покупки!`, 'error');
+            }
+        }
+        
+        // Покупка еды
+        function buyFood(foodId, quantity) {
+            const food = gameState.foods.find(f => f.id === foodId);
+            const totalPrice = food.basePrice * quantity;
+            
+            if (food && gameState.coins >= totalPrice) {
+                gameState.coins -= totalPrice;
+                gameState.food += food.amount * quantity;
+                food.owned += quantity;
+                
+                showNotification(`Вы купили ${quantity} ${food.name}!`);
+                updateUI();
+                renderFood();
+                checkAchievements();
+            } else {
+                showNotification(`Недостаточно монет для покупки!`, 'error');
+            }
+        }
+        
+        // Покупка игрушки
+        function buyToy(toyId, quantity) {
+            const toy = gameState.toys.find(t => t.id === toyId);
+            const totalPrice = toy.basePrice * quantity;
+            
+            if (toy && gameState.coins >= totalPrice) {
+                gameState.coins -= totalPrice;
+                gameState.happiness += toy.happiness * quantity;
+                toy.owned += quantity;
+                
+                showNotification(`Вы купили ${quantity} ${toy.name}! Счастье животных увеличилось на ${toy.happiness * 100}%`);
+                updateUI();
+                renderToys();
+                checkAchievements();
+            } else {
+                showNotification(`Недостаточно монет для покупки!`, 'error');
+            }
+        }
+        
+        // Покупка эксклюзивного животного
+        function buyExclusiveAnimal(animalId, quantity) {
+            const animal = gameState.exclusiveAnimals.find(a => a.id === animalId);
+            const totalPrice = animal.basePrice * quantity;
             
             if (animal && gameState.coins >= totalPrice) {
                 gameState.coins -= totalPrice;
@@ -2130,22 +3367,27 @@
                 showNotification(`Вы купили ${quantity} ${animal.name.toLowerCase()}!`);
                 
                 updateUI();
-                renderAnimals();
+                renderExclusiveAnimals();
+                checkAchievements();
             } else {
                 showNotification(`Недостаточно монет для покупки!`, 'error');
             }
         }
         
-        // Покупка еды
-        function buyFood(foodId) {
-            const food = gameState.foods.find(f => f.id === foodId);
+        // Покупка эксклюзивной игрушки
+        function buyExclusiveToy(toyId, quantity) {
+            const toy = gameState.exclusiveToys.find(t => t.id === toyId);
+            const totalPrice = toy.basePrice * quantity;
             
-            if (food && gameState.coins >= food.basePrice) {
-                gameState.coins -= food.basePrice;
-                gameState.food += food.amount;
+            if (toy && gameState.coins >= totalPrice) {
+                gameState.coins -= totalPrice;
+                gameState.happiness += toy.happiness * quantity;
+                toy.owned += quantity;
                 
-                showNotification(`Вы купили ${food.name}!`);
+                showNotification(`Вы купили ${quantity} ${toy.name}! Счастье животных увеличилось на ${toy.happiness * 100}%`);
                 updateUI();
+                renderExclusiveToys();
+                checkAchievements();
             } else {
                 showNotification(`Недостаточно монет для покупки!`, 'error');
             }
@@ -2153,13 +3395,21 @@
         
         // Обновление дохода
         function updateIncome() {
+            // Не начислять доход, если нет еды
+            if (gameState.food <= 0) return;
+            
             const baseIncome = gameState.animals.reduce((sum, animal) => {
                 return sum + (animal.income * animal.owned);
             }, 0);
             
+            const exclusiveIncome = gameState.exclusiveAnimals.reduce((sum, animal) => {
+                return sum + (animal.income * animal.owned);
+            }, 0);
+            
             const incomeMultiplier = (Date.now() - gameState.lastActiveTime > 60000) ? 0.033 : 1;
-            gameState.coins += (baseIncome * gameState.visitors * incomeMultiplier) / 60;
-            coinsEl.textContent = Math.floor(gameState.coins);
+            const totalIncome = (baseIncome + exclusiveIncome) * gameState.happiness;
+            gameState.coins += (totalIncome * gameState.visitors * incomeMultiplier) / 60;
+            if (coinsEl) coinsEl.textContent = Math.floor(gameState.coins);
         }
         
         // Обновление потребления еды
@@ -2168,30 +3418,40 @@
                 return sum + (animal.food * animal.owned);
             }, 0);
             
-            foodConsumptionEl.textContent = foodConsumption.toFixed(1);
+            const exclusiveConsumption = gameState.exclusiveAnimals.reduce((sum, animal) => {
+                return sum + (animal.food * animal.owned);
+            }, 0);
+            
+            const totalConsumption = foodConsumption + exclusiveConsumption;
+            if (foodConsumptionEl) foodConsumptionEl.textContent = totalConsumption.toFixed(1);
             
             if (gameState.food > 0) {
-                gameState.food -= foodConsumption / 12;
+                const consumed = totalConsumption / 12;
+                gameState.food -= consumed;
+                gameState.totalFoodConsumed += consumed;
                 if (gameState.food < 0) gameState.food = 0;
-                foodEl.textContent = Math.floor(gameState.food);
+                if (foodEl) foodEl.textContent = Math.floor(gameState.food);
+                checkAchievements();
             }
         }
         
         // Обновление посетителей
         function updateVisitors() {
             const maxVisitors = gameState.animals.reduce((sum, animal) => sum + animal.owned, 0) * 3;
+            const exclusiveVisitors = gameState.exclusiveAnimals.reduce((sum, animal) => sum + animal.owned, 0) * 5;
+            const totalMaxVisitors = maxVisitors + exclusiveVisitors;
             
-            if (gameState.visitors < maxVisitors) {
+            if (gameState.visitors < totalMaxVisitors) {
                 const newVisitors = Math.floor(Math.random() * 3) + 1;
                 gameState.visitors += newVisitors;
                 gameState.totalVisitors += newVisitors;
-                if (gameState.visitors > maxVisitors) gameState.visitors = maxVisitors;
+                if (gameState.visitors > totalMaxVisitors) gameState.visitors = totalMaxVisitors;
             }
             
-            visitorCountEl.textContent = gameState.visitors;
-            totalVisitorsEl.textContent = gameState.totalVisitors;
+            if (visitorCountEl) visitorCountEl.textContent = gameState.visitors;
+            if (totalVisitorsEl) totalVisitorsEl.textContent = gameState.totalVisitors;
             
-            if (gameState.visitors > 0 && Math.random() > 0.5) {
+            if (visitorsContainerEl && gameState.visitors > 0 && Math.random() > 0.5) {
                 const visitor = document.createElement('div');
                 visitor.className = 'visitor';
                 visitor.textContent = '👤';
@@ -2205,6 +3465,8 @@
         
         // Показать уведомление
         function showNotification(message, type = 'success') {
+            if (!notificationEl) return;
+            
             notificationEl.textContent = message;
             notificationEl.className = 'notification show';
             notificationEl.innerHTML = `<i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i> ${message}`;
@@ -2222,6 +3484,117 @@
             }, 2000);
         }
         
+        // Проверка достижений
+        function checkAchievements() {
+            achievements.forEach(achievement => {
+                if (!gameState.achievementsUnlocked.includes(achievement.id) && achievement.condition(gameState)) {
+                    unlockAchievement(achievement);
+                }
+            });
+        }
+        
+        // Разблокировка достижения
+        function unlockAchievement(achievement) {
+            gameState.achievementsUnlocked.push(achievement.id);
+            
+            // Выдача награды
+            if (achievement.reward.coins) {
+                gameState.coins += achievement.reward.coins;
+            }
+            if (achievement.reward.food) {
+                gameState.food += achievement.reward.food;
+            }
+            
+            // Показ уведомления
+            showAchievementNotification(achievement);
+            updateUI();
+            renderAchievements(); // Обновляем список достижений
+        }
+        
+        // Показать уведомление о достижении
+        function showAchievementNotification(achievement) {
+            const notification = document.createElement('div');
+            notification.className = `achievement-notification ${achievement.type}`;
+            notification.innerHTML = `
+                <div class="achievement-icon">
+                    <i class="fas fa-medal"></i>
+                </div>
+                <div class="achievement-text">
+                    <div class="achievement-title">${achievement.name}</div>
+                    <div class="achievement-description">${achievement.description}</div>
+                </div>
+                <div class="achievement-reward">
+                    ${achievement.reward.coins} <i class="fas fa-coins"></i>
+                    ${achievement.reward.food} <i class="fas fa-apple-alt"></i>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 100);
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    notification.remove();
+                }, 500);
+            }, 5000);
+        }
+        
+        // Отрисовка достижений
+        function renderAchievements() {
+            if (!achievementsContainer) return;
+            
+            const activeFilter = achievementsFilter.querySelector('.filter-btn.active').dataset.filter;
+            
+            // Обновляем статистику
+            const total = achievements.length;
+            const unlocked = gameState.achievementsUnlocked.length;
+            const progress = Math.round((unlocked / total) * 100);
+            
+            totalAchievementsEl.textContent = total;
+            unlockedAchievementsEl.textContent = unlocked;
+            progressAchievementsEl.textContent = `${progress}%`;
+            
+            achievementsContainer.innerHTML = '';
+            
+            achievements
+                .filter(achievement => 
+                    activeFilter === 'all' || 
+                    achievement.type === activeFilter
+                )
+                .forEach(achievement => {
+                    const isUnlocked = gameState.achievementsUnlocked.includes(achievement.id);
+                    
+                    const card = document.createElement('div');
+                    card.className = `achievement-card ${isUnlocked ? '' : 'locked'}`;
+                    card.innerHTML = `
+                        <div class="achievement-header">
+                            <div class="achievement-medal ${achievement.type}">
+                                <i class="fas fa-medal"></i>
+                            </div>
+                            <div class="achievement-title">${achievement.name}</div>
+                        </div>
+                        <div class="achievement-description">${achievement.description}</div>
+                        <div class="achievement-reward">
+                            <div class="reward-coins">
+                                <i class="fas fa-coins"></i> ${achievement.reward.coins}
+                            </div>
+                            <div class="reward-food">
+                                <i class="fas fa-apple-alt"></i> ${achievement.reward.food}
+                            </div>
+                        </div>
+                        <div class="achievement-status ${isUnlocked ? 'unlocked' : ''}">
+                            ${isUnlocked ? 'Получено' : 'Не получено'}
+                        </div>
+                    `;
+                    
+                    achievementsContainer.appendChild(card);
+                });
+        }
+        
         // Сохранение игры
         function saveGame() {
             const saveData = {
@@ -2231,19 +3604,34 @@
                 maxEnergy: gameState.maxEnergy,
                 animals: gameState.animals,
                 foods: gameState.foods,
+                toys: gameState.toys,
+                exclusiveAnimals: gameState.exclusiveAnimals,
+                exclusiveToys: gameState.exclusiveToys,
                 visitors: gameState.visitors,
                 totalVisitors: gameState.totalVisitors,
                 lastUpdate: Date.now(),
                 theme: gameState.theme,
+                happiness: gameState.happiness,
                 games: gameState.games,
-                usedPromoCodes: gameState.usedPromoCodes
+                usedPromoCodes: gameState.usedPromoCodes,
+                achievementsUnlocked: gameState.achievementsUnlocked,
+                totalClicks: gameState.totalClicks,
+                totalGamesPlayed: gameState.totalGamesPlayed,
+                totalFoodConsumed: gameState.totalFoodConsumed,
+                fullEnergyCount: gameState.fullEnergyCount,
+                highestSnakeScore: gameState.highestSnakeScore,
+                highestMemoryPairs: gameState.highestMemoryPairs,
+                highestCatchScore: gameState.highestCatchScore,
+                highestFeedingScore: gameState.highestFeedingScore,
+                highestCareScore: gameState.highestCareScore,
+                bestMemoryTime: gameState.bestMemoryTime
             };
-            localStorage.setItem('lool', JSON.stringify(saveData));
+            localStorage.setItem('Д9090', JSON.stringify(saveData));
         }
         
         // Загрузка игры
         function loadGame() {
-            const saveData = localStorage.getItem('lool');
+            const saveData = localStorage.getItem('Д9090');
             
             if (saveData) {
                 try {
@@ -2254,24 +3642,44 @@
                     gameState.maxEnergy = parsedData.maxEnergy || 100;
                     gameState.animals = parsedData.animals || JSON.parse(JSON.stringify(animals));
                     gameState.foods = parsedData.foods || JSON.parse(JSON.stringify(foods));
+                    gameState.toys = parsedData.toys || JSON.parse(JSON.stringify(toys));
+                    gameState.exclusiveAnimals = parsedData.exclusiveAnimals || JSON.parse(JSON.stringify(exclusiveAnimals));
+                    gameState.exclusiveToys = parsedData.exclusiveToys || JSON.parse(JSON.stringify(exclusiveToys));
                     gameState.visitors = parsedData.visitors || 0;
                     gameState.totalVisitors = parsedData.totalVisitors || 0;
                     gameState.lastUpdate = parsedData.lastUpdate || Date.now();
                     gameState.theme = parsedData.theme || 'dark-red';
+                    gameState.happiness = parsedData.happiness || 1.0;
                     gameState.games = parsedData.games || {
                         memory: { active: false, cards: [], flippedCards: [], matchedPairs: 0, moves: 0 },
                         snake: { active: false, cooldown: 0, score: 0 },
                         catch: { active: false, cooldown: 0, score: 0 },
-                        feeding: { active: false, cooldown: 0, score: 0 }
+                        feeding: { active: false, cooldown: 0, score: 0 },
+                        care: { active: false, cooldown: 0, score: 0 }
                     };
                     gameState.usedPromoCodes = parsedData.usedPromoCodes || [];
+                    gameState.achievementsUnlocked = parsedData.achievementsUnlocked || [];
+                    gameState.totalClicks = parsedData.totalClicks || 0;
+                    gameState.totalGamesPlayed = parsedData.totalGamesPlayed || 0;
+                    gameState.totalFoodConsumed = parsedData.totalFoodConsumed || 0;
+                    gameState.fullEnergyCount = parsedData.fullEnergyCount || 0;
+                    gameState.highestSnakeScore = parsedData.highestSnakeScore || 0;
+                    gameState.highestMemoryPairs = parsedData.highestMemoryPairs || 0;
+                    gameState.highestCatchScore = parsedData.highestCatchScore || 0;
+                    gameState.highestFeedingScore = parsedData.highestFeedingScore || 0;
+                    gameState.highestCareScore = parsedData.highestCareScore || 0;
+                    gameState.bestMemoryTime = parsedData.bestMemoryTime || 9999;
                     
                     const timeDiff = (Date.now() - gameState.lastUpdate) / 1000;
                     const baseIncome = gameState.animals.reduce((sum, animal) => {
                         return sum + (animal.income * animal.owned);
                     }, 0);
                     
-                    gameState.coins += (baseIncome * gameState.visitors * timeDiff) / 60 / 30;
+                    const exclusiveIncome = gameState.exclusiveAnimals.reduce((sum, animal) => {
+                        return sum + (animal.income * animal.owned);
+                    }, 0);
+                    
+                    gameState.coins += ((baseIncome + exclusiveIncome) * gameState.visitors * gameState.happiness * timeDiff) / 60 / 30;
                     
                     const energyPerSecond = 6 / 60;
                     gameState.energy += energyPerSecond * timeDiff;
@@ -2291,6 +3699,8 @@
         
         // Применить тему
         function applyTheme() {
+            if (!themeSelector) return;
+            
             document.querySelectorAll('.theme-option').forEach(option => {
                 if (option.dataset.theme === gameState.theme) {
                     option.classList.add('active');
@@ -2326,7 +3736,9 @@
                     buttonBg: '#f0f2f5',
                     buttonText: '#333',
                     energyColor1: '#ff5252', energyColor2: '#ff0000',
-                    neonEffectColor: '#ff5252'
+                    neonEffectColor: '#ff5252',
+                    toyColor1: '#ff8e8e', toyColor2: '#ffb6b6',
+                    exclusiveColor1: '#4CAF50', exclusiveColor2: '#2E7D32'
                 },
                 'dark-blue': { 
                     bodyBg: 'linear-gradient(135deg, #00c9ff, #92fe9d, #f8ff00, #ff00cc, #00ffcc)',
@@ -2347,7 +3759,9 @@
                     buttonBg: '#f0f2f5',
                     buttonText: '#333',
                     energyColor1: '#64b5f6', energyColor2: '#0d47a1',
-                    neonEffectColor: '#64b5f6'
+                    neonEffectColor: '#64b5f6',
+                    toyColor1: '#90caf9', toyColor2: '#bbdefb',
+                    exclusiveColor1: '#FF9800', exclusiveColor2: '#F57C00'
                 },
                 'dark-green': { 
                     bodyBg: 'linear-gradient(135deg, #00ff87, #60efff, #0061ff, #ff0, #ff00aa)',
@@ -2368,7 +3782,9 @@
                     buttonBg: '#f0f2f5',
                     buttonText: '#333',
                     energyColor1: '#4caf50', energyColor2: '#2e7d32',
-                    neonEffectColor: '#76ff03'
+                    neonEffectColor: '#76ff03',
+                    toyColor1: '#a5d6a7', toyColor2: '#c8e6c9',
+                    exclusiveColor1: '#9C27B0', exclusiveColor2: '#7B1FA2'
                 },
                 'dark-purple': { 
                     bodyBg: 'linear-gradient(135deg, #ff00cc, #ffcc00, #00ffcc, #cc00ff, #00ccff)',
@@ -2389,7 +3805,9 @@
                     buttonBg: '#f0f2f5',
                     buttonText: '#333',
                     energyColor1: '#ba68c8', energyColor2: '#6a1b9a',
-                    neonEffectColor: '#ba68c8'
+                    neonEffectColor: '#ba68c8',
+                    toyColor1: '#ce93d8', toyColor2: '#e1bee7',
+                    exclusiveColor1: '#FFD600', exclusiveColor2: '#FFC107'
                 },
                 'dark-yellow': { 
                     bodyBg: 'linear-gradient(135deg, #ffd166, #ef476f, #06d6a0, #118ab2, #073b4c)',
@@ -2410,7 +3828,9 @@
                     buttonBg: '#f0f2f5',
                     buttonText: '#333',
                     energyColor1: '#ffd54f', energyColor2: '#ff9800',
-                    neonEffectColor: '#ffd54f'
+                    neonEffectColor: '#ffd54f',
+                    toyColor1: '#ffec78', toyColor2: '#fff9c4',
+                    exclusiveColor1: '#2196F3', exclusiveColor2: '#0D47A1'
                 },
                 'light-red': { 
                     bodyBg: 'linear-gradient(135deg, #ff6b6b, #ff8e8e, #ffb6b6, #ffcdd2, #ffebee)',
@@ -2431,7 +3851,9 @@
                     buttonBg: '#ffebee',
                     buttonText: '#333',
                     energyColor1: '#ff8a80', energyColor2: '#ff5252',
-                    neonEffectColor: '#ff8a80'
+                    neonEffectColor: '#ff8a80',
+                    toyColor1: '#ffebee', toyColor2: '#ffcdd2',
+                    exclusiveColor1: '#4CAF50', exclusiveColor2: '#2E7D32'
                 },
                 'light-yellow': { 
                     bodyBg: 'linear-gradient(135deg, #ffd54f, #ffec78, #fff9c4, #fffde7, #fffff0)',
@@ -2452,7 +3874,9 @@
                     buttonBg: '#fffde7',
                     buttonText: '#333',
                     energyColor1: '#ffff8d', energyColor2: '#ffd54f',
-                    neonEffectColor: '#ffff8d'
+                    neonEffectColor: '#ffff8d',
+                    toyColor1: '#fffde7', toyColor2: '#fff9c4',
+                    exclusiveColor1: '#9C27B0', exclusiveColor2: '#7B1FA2'
                 },
                 'light-lime': { 
                     bodyBg: 'linear-gradient(135deg, #76ff03, #a7ff56, #ccff90, #e8f5e9, #f1f8e9)',
@@ -2473,7 +3897,9 @@
                     buttonBg: '#f1f8e9',
                     buttonText: '#333',
                     energyColor1: '#ccff90', energyColor2: '#76ff03',
-                    neonEffectColor: '#ccff90'
+                    neonEffectColor: '#ccff90',
+                    toyColor1: '#f1f8e9', toyColor2: '#e8f5e9',
+                    exclusiveColor1: '#FF9800', exclusiveColor2: '#F57C00'
                 },
                 'light-blue': { 
                     bodyBg: 'linear-gradient(135deg, #64b5f6, #90caf9, #bbdefb, #e3f2fd, #f0f7ff)',
@@ -2494,7 +3920,9 @@
                     buttonBg: '#e3f2fd',
                     buttonText: '#333',
                     energyColor1: '#90caf9', energyColor2: '#64b5f6',
-                    neonEffectColor: '#90caf9'
+                    neonEffectColor: '#90caf9',
+                    toyColor1: '#e3f2fd', toyColor2: '#bbdefb',
+                    exclusiveColor1: '#E91E63', exclusiveColor2: '#C2185B'
                 },
                 'light-pink': { 
                     bodyBg: 'linear-gradient(135deg, #f48fb1, #f8bbd0, #fce4ec, #f9eaf0, #f4e0e6)',
@@ -2515,17 +3943,19 @@
                     buttonBg: '#fce4ec',
                     buttonText: '#333',
                     energyColor1: '#f8bbd0', energyColor2: '#f48fb1',
-                    neonEffectColor: '#f8bbd0'
+                    neonEffectColor: '#f8bbd0',
+                    toyColor1: '#fce4ec', toyColor2: '#f8bbd0',
+                    exclusiveColor1: '#2196F3', exclusiveColor2: '#0D47A1'
                 }
             };
             
             const theme = themes[themeName] || themes['dark-red'];
             
-            document.body.style.background = theme.bodyBg;
+            if (document.body) document.body.style.background = theme.bodyBg;
             document.body.setAttribute('data-theme', themeName);
             
             const header = document.querySelector('.header');
-            header.style.background = theme.headerBg;
+            if (header) header.style.background = theme.headerBg;
             
             document.documentElement.style.setProperty('--card-color1', theme.cardColor1);
             document.documentElement.style.setProperty('--card-color2', theme.cardColor2);
@@ -2548,6 +3978,10 @@
             document.documentElement.style.setProperty('--energy-color1', theme.energyColor1);
             document.documentElement.style.setProperty('--energy-color2', theme.energyColor2);
             document.documentElement.style.setProperty('--neon-effect-color', theme.neonEffectColor);
+            document.documentElement.style.setProperty('--toy-color1', theme.toyColor1);
+            document.documentElement.style.setProperty('--toy-color2', theme.toyColor2);
+            document.documentElement.style.setProperty('--exclusive-color1', theme.exclusiveColor1);
+            document.documentElement.style.setProperty('--exclusive-color2', theme.exclusiveColor2);
         }
         
         // Игра Парные карточки
@@ -2586,7 +4020,7 @@
                 if (gameState.games.memory.flippedCards.length === 2) {
                     canFlip = false;
                     gameState.games.memory.moves++;
-                    memoryMovesEl.textContent = gameState.games.memory.moves;
+                    if (memoryMovesEl) memoryMovesEl.textContent = gameState.games.memory.moves;
                     
                     const firstIndex = gameState.games.memory.flippedCards[0];
                     const secondIndex = gameState.games.memory.flippedCards[1];
@@ -2599,7 +4033,7 @@
                     
                     if (firstImage === secondImage) {
                         gameState.games.memory.matchedPairs++;
-                        memoryPairsEl.textContent = `${gameState.games.memory.matchedPairs}/18`;
+                        if (memoryPairsEl) memoryPairsEl.textContent = `${gameState.games.memory.matchedPairs}/18`;
                         
                         gameState.coins += 3;
                         updateUI();
@@ -2615,8 +4049,8 @@
                         }, 1000);
                     } else {
                         setTimeout(() => {
-                            firstCard.classList.remove('flipped');
-                            secondCard.classList.remove('flipped');
+                            if (firstCard) firstCard.classList.remove('flipped');
+                            if (secondCard) secondCard.classList.remove('flipped');
                             gameState.games.memory.flippedCards = [];
                             
                             setTimeout(() => {
@@ -2629,23 +4063,30 @@
             
             function endMemoryGame() {
                 gameState.games.memory.active = false;
-                memoryStartBtn.disabled = false;
+                if (memoryStartBtn) memoryStartBtn.disabled = false;
                 showNotification(`Игра окончена! Вы нашли все пары за ${gameState.games.memory.moves} ходов!`);
+                
+                // Обновляем статистику
+                if (gameState.games.memory.matchedPairs > gameState.highestMemoryPairs) {
+                    gameState.highestMemoryPairs = gameState.games.memory.matchedPairs;
+                }
+                gameState.totalGamesPlayed++;
+                checkAchievements();
             }
             
             function startMemoryGame() {
                 gameState.games.memory.active = true;
-                memoryStartBtn.disabled = true;
+                if (memoryStartBtn) memoryStartBtn.disabled = true;
                 canFlip = true;
                 
-                memoryGridEl.innerHTML = '';
+                if (memoryGridEl) memoryGridEl.innerHTML = '';
                 gameState.games.memory.cards = [];
                 gameState.games.memory.flippedCards = [];
                 gameState.games.memory.matchedPairs = 0;
                 gameState.games.memory.moves = 0;
                 
-                memoryMovesEl.textContent = '0';
-                memoryPairsEl.textContent = '0/18';
+                if (memoryMovesEl) memoryMovesEl.textContent = '0';
+                if (memoryPairsEl) memoryPairsEl.textContent = '0/18';
                 
                 let cardImages = [];
                 let allImages = [...gameImages.animals];
@@ -2664,17 +4105,23 @@
                 
                 gameState.games.memory.cards = cardImages;
                 
-                cardImages.forEach((image, index) => {
-                    const card = createCard(image, index);
-                    memoryGridEl.appendChild(card);
-                });
+                if (memoryGridEl) {
+                    cardImages.forEach((image, index) => {
+                        const card = createCard(image, index);
+                        memoryGridEl.appendChild(card);
+                    });
+                }
             }
             
-            memoryStartBtn.addEventListener('click', startMemoryGame);
+            if (memoryStartBtn) {
+                memoryStartBtn.addEventListener('click', startMemoryGame);
+            }
         }
 
         // Игра Змейка (Snake) с животными
         function setupSnakeGame() {
+            if (!snakeCanvas) return;
+            
             const gridSize = 20;
             const cellSize = snakeCanvas.width / gridSize;
             let snake = [];
@@ -2711,7 +4158,7 @@
                 direction = 'right';
                 isGameOver = false;
                 gameState.games.snake.score = 0;
-                snakeScoreEl.textContent = '0';
+                if (snakeScoreEl) snakeScoreEl.textContent = '0';
             }
             
             function generateFood() {
@@ -2795,7 +4242,7 @@
                 
                 if (head.x === food.x && head.y === food.y) {
                     gameState.games.snake.score += 10;
-                    snakeScoreEl.textContent = gameState.games.snake.score;
+                    if (snakeScoreEl) snakeScoreEl.textContent = gameState.games.snake.score;
                     gameState.coins += 1;
                     updateUI();
                     generateFood();
@@ -2844,40 +4291,49 @@
                 
                 snakeCtx.font = '20px Roboto';
                 snakeCtx.fillText(`Счет: ${gameState.games.snake.score}`, snakeCanvas.width/2, snakeCanvas.height/2 + 20);
+                
+                // Обновляем статистику
+                if (gameState.games.snake.score > gameState.highestSnakeScore) {
+                    gameState.highestSnakeScore = gameState.games.snake.score;
+                }
+                gameState.totalGamesPlayed++;
+                checkAchievements();
             }
             
-            snakeStartBtn.addEventListener('click', () => {
-                if (gameState.games.snake.cooldown > 0) return;
-                
-                initSnake();
-                gameState.games.snake.active = true;
-                snakeStartBtn.disabled = true;
-                
-                let timeLeft = 180;
-                snakeTimerEl.textContent = `03:00`;
-                
-                gameInterval = setInterval(updateGame, 150);
-                
-                gameTimer = setInterval(() => {
-                    timeLeft--;
-                    const minutes = Math.floor(timeLeft / 60);
-                    const seconds = timeLeft % 60;
-                    snakeTimerEl.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            if (snakeStartBtn) {
+                snakeStartBtn.addEventListener('click', () => {
+                    if (gameState.games.snake.cooldown > 0) return;
                     
-                    if (timeLeft <= 0) {
-                        endSnakeGame();
-                    }
-                }, 1000);
-                
-                drawGame();
-            });
+                    initSnake();
+                    gameState.games.snake.active = true;
+                    snakeStartBtn.disabled = true;
+                    
+                    let timeLeft = 1200;
+                    if (snakeTimerEl) snakeTimerEl.textContent = `20:00`;
+                    
+                    gameInterval = setInterval(updateGame, 150);
+                    
+                    gameTimer = setInterval(() => {
+                        timeLeft--;
+                        const minutes = Math.floor(timeLeft / 60);
+                        const seconds = timeLeft % 60;
+                        if (snakeTimerEl) snakeTimerEl.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                        
+                        if (timeLeft <= 0) {
+                            endSnakeGame();
+                        }
+                    }, 1000);
+                    
+                    drawGame();
+                });
+            }
             
             function endSnakeGame() {
                 clearInterval(gameInterval);
                 clearInterval(gameTimer);
                 
                 gameState.games.snake.active = false;
-                snakeStartBtn.disabled = false;
+                if (snakeStartBtn) snakeStartBtn.disabled = false;
                 
                 const coinsEarned = Math.floor(gameState.games.snake.score / 10);
                 gameState.coins += coinsEarned;
@@ -2885,28 +4341,43 @@
                 updateUI();
                 
                 gameState.games.snake.cooldown = 180;
-                snakeCooldownEl.style.display = 'flex';
+                if (snakeCooldownEl) snakeCooldownEl.style.display = 'flex';
             }
             
             // Обработчики для мобильных кнопок
-            document.querySelector('.snake-mobile-btn.up').addEventListener('click', () => {
-                if (direction !== 'down') direction = 'up';
-            });
-            document.querySelector('.snake-mobile-btn.down').addEventListener('click', () => {
-                if (direction !== 'up') direction = 'down';
-            });
-            document.querySelector('.snake-mobile-btn.left').addEventListener('click', () => {
-                if (direction !== 'right') direction = 'left';
-            });
-            document.querySelector('.snake-mobile-btn.right').addEventListener('click', () => {
-                if (direction !== 'left') direction = 'right';
-            });
+            const mobileUpBtn = document.querySelector('.snake-mobile-btn.up');
+            const mobileDownBtn = document.querySelector('.snake-mobile-btn.down');
+            const mobileLeftBtn = document.querySelector('.snake-mobile-btn.left');
+            const mobileRightBtn = document.querySelector('.snake-mobile-btn.right');
+            
+            if (mobileUpBtn) {
+                mobileUpBtn.addEventListener('click', () => {
+                    if (direction !== 'down') direction = 'up';
+                });
+            }
+            if (mobileDownBtn) {
+                mobileDownBtn.addEventListener('click', () => {
+                    if (direction !== 'up') direction = 'down';
+                });
+            }
+            if (mobileLeftBtn) {
+                mobileLeftBtn.addEventListener('click', () => {
+                    if (direction !== 'right') direction = 'left';
+                });
+            }
+            if (mobileRightBtn) {
+                mobileRightBtn.addEventListener('click', () => {
+                    if (direction !== 'left') direction = 'right';
+                });
+            }
             
             document.addEventListener('keydown', handleKeyDown);
         }
 
         // Игра "Лови животных"
         function setupCatchGame() {
+            if (!catchAreaEl || !catchStartBtn) return;
+            
             let catchInterval;
             let spawnInterval;
             let gameTimer;
@@ -2916,13 +4387,13 @@
                 
                 catchAreaEl.innerHTML = '';
                 gameState.games.catch.score = 0;
-                catchScoreEl.textContent = '0';
+                if (catchScoreEl) catchScoreEl.textContent = '0';
                 
                 gameState.games.catch.active = true;
                 catchStartBtn.disabled = true;
                 
                 let timeLeft = 60;
-                catchTimerEl.textContent = `01:00`;
+                if (catchTimerEl) catchTimerEl.textContent = `01:00`;
                 
                 spawnInterval = setInterval(spawnCatchObject, 800);
                 
@@ -2930,7 +4401,7 @@
                     timeLeft--;
                     const minutes = Math.floor(timeLeft / 60);
                     const seconds = timeLeft % 60;
-                    catchTimerEl.textContent = `00:${seconds.toString().padStart(2, '0')}`;
+                    if (catchTimerEl) catchTimerEl.textContent = `00:${seconds.toString().padStart(2, '0')}`;
                     
                     if (timeLeft <= 0) {
                         endCatchGame();
@@ -2993,7 +4464,7 @@
                     if (gameState.coins < 0) gameState.coins = 0;
                 }
                 
-                catchScoreEl.textContent = gameState.games.catch.score;
+                if (catchScoreEl) catchScoreEl.textContent = gameState.games.catch.score;
                 updateUI();
                 
                 setTimeout(() => {
@@ -3016,13 +4487,22 @@
                 showNotification(`Игра окончена! Вы поймали ${gameState.games.catch.score} животных. Бонус: ${bonus} монет`);
                 updateUI();
                 
+                // Обновляем статистику
+                if (gameState.games.catch.score > gameState.highestCatchScore) {
+                    gameState.highestCatchScore = gameState.games.catch.score;
+                }
+                gameState.totalGamesPlayed++;
+                checkAchievements();
+                
                 gameState.games.catch.cooldown = 180;
-                catchCooldownEl.style.display = 'flex';
+                if (catchCooldownEl) catchCooldownEl.style.display = 'flex';
             }
         }
 
-        // НОВАЯ ИГРА: Корми животных
+        // Игра "Корми животных"
         function setupFeedingGame() {
+            if (!currentAnimalEl || !animalImgEl || !animalDesireEl || !foodOptionsEl || !feedingStartBtn) return;
+            
             let feedingTimer;
             let currentAnimal = null;
             let correctFood = null;
@@ -3084,7 +4564,7 @@
                 if (selectedFood.id === correctFood.id) {
                     // Правильный ответ
                     gameState.games.feeding.score++;
-                    feedingScoreEl.textContent = gameState.games.feeding.score;
+                    if (feedingScoreEl) feedingScoreEl.textContent = gameState.games.feeding.score;
                     gameState.coins += 1;
                     updateUI();
                     showNotification('Правильно! +1 монета');
@@ -3102,11 +4582,11 @@
                 
                 gameState.games.feeding.active = true;
                 gameState.games.feeding.score = 0;
-                feedingScoreEl.textContent = '0';
+                if (feedingScoreEl) feedingScoreEl.textContent = '0';
                 feedingStartBtn.disabled = true;
                 
                 let timeLeft = 30;
-                feedingTimerEl.textContent = '00:30';
+                if (feedingTimerEl) feedingTimerEl.textContent = '00:30';
                 
                 // Генерируем первое задание
                 generateTask();
@@ -3115,7 +4595,7 @@
                 feedingTimer = setInterval(() => {
                     timeLeft--;
                     const seconds = timeLeft % 60;
-                    feedingTimerEl.textContent = `00:${seconds.toString().padStart(2, '0')}`;
+                    if (feedingTimerEl) feedingTimerEl.textContent = `00:${seconds.toString().padStart(2, '0')}`;
                     
                     if (timeLeft <= 0) {
                         endFeedingGame();
@@ -3131,8 +4611,201 @@
                 
                 showNotification(`Игра окончена! Вы накормили ${gameState.games.feeding.score} животных`);
                 
+                // Обновляем статистику
+                if (gameState.games.feeding.score > gameState.highestFeedingScore) {
+                    gameState.highestFeedingScore = gameState.games.feeding.score;
+                }
+                gameState.totalGamesPlayed++;
+                checkAchievements();
+                
                 gameState.games.feeding.cooldown = 120;
-                feedingCooldownEl.style.display = 'flex';
+                if (feedingCooldownEl) feedingCooldownEl.style.display = 'flex';
+            }
+        }
+        
+        // НОВАЯ ИГРА: Уход за животными
+        function setupAnimalCareGame() {
+            if (!animalFaceImg || !feedBtn || !cleanBtn || !playBtn || !careStartBtn) return;
+            
+            let careTimer;
+            let hunger = 100;
+            let clean = 100;
+            let mood = 100;
+            let careScore = 0;
+            
+            // Случайное животное для ухода
+            const randomAnimal = gameState.animals[Math.floor(Math.random() * gameState.animals.length)];
+            animalFaceImg.src = randomAnimal.image;
+            
+            function updateStats() {
+                hunger -= 1.5;
+                clean -= 1;
+                mood -= 1;
+                
+                if (hunger < 0) hunger = 0;
+                if (clean < 0) clean = 0;
+                if (mood < 0) mood = 0;
+                
+                hungerBarEl.style.width = `${hunger}%`;
+                cleanBarEl.style.width = `${clean}%`;
+                moodBarEl.style.width = `${mood}%`;
+                
+                hungerValueEl.textContent = `${Math.round(hunger)}%`;
+                cleanValueEl.textContent = `${Math.round(clean)}%`;
+                moodValueEl.textContent = `${Math.round(mood)}%`;
+                
+                // Обновляем статус животного
+                if (hunger < 30 || clean < 30 || mood < 30) {
+                    animalStatusEl.textContent = "Статус: Грустный";
+                    animalFaceImg.style.filter = "grayscale(30%)";
+                } else {
+                    animalStatusEl.textContent = "Статус: Счастлив";
+                    animalFaceImg.style.filter = "none";
+                }
+                
+                // Проверка окончания игры
+                if (hunger <= 0 || clean <= 0 || mood <= 0) {
+                    endCareGame();
+                }
+            }
+            
+            function showReaction(reaction) {
+                animalReactionEl.textContent = reaction;
+                animalReactionEl.style.opacity = 1;
+                animalReactionEl.style.transform = "translateX(-50%) translateY(-20px)";
+                
+                setTimeout(() => {
+                    animalReactionEl.style.opacity = 0;
+                    animalReactionEl.style.transform = "translateX(-50%) translateY(0)";
+                }, 1000);
+            }
+            
+            function feedAnimal() {
+                if (!gameState.games.care.active) return;
+                
+                hunger += 20;
+                clean -= 5;
+                if (hunger > 100) hunger = 100;
+                if (clean < 0) clean = 0;
+                
+                careScore += 1;
+                careScoreEl.textContent = careScore;
+                
+                showReaction('😋');
+                updateStats();
+            }
+            
+            function cleanAnimal() {
+                if (!gameState.games.care.active) return;
+                
+                clean += 25;
+                if (clean > 100) clean = 100;
+                
+                careScore += 1;
+                careScoreEl.textContent = careScore;
+                
+                showReaction('✨');
+                updateStats();
+            }
+            
+            function playWithAnimal() {
+                if (!gameState.games.care.active) return;
+                
+                mood += 15;
+                hunger -= 5;
+                clean -= 5;
+                if (mood > 100) mood = 100;
+                if (hunger < 0) hunger = 0;
+                if (clean < 0) clean = 0;
+                
+                careScore += 1;
+                careScoreEl.textContent = careScore;
+                
+                showReaction('😄');
+                updateStats();
+            }
+            
+            if (feedBtn) feedBtn.addEventListener('click', feedAnimal);
+            if (cleanBtn) cleanBtn.addEventListener('click', cleanAnimal);
+            if (playBtn) playBtn.addEventListener('click', playWithAnimal);
+            
+            careStartBtn.addEventListener('click', () => {
+                if (gameState.games.care.cooldown > 0) return;
+                
+                // Сброс показателей
+                hunger = 100;
+                clean = 100;
+                mood = 100;
+                careScore = 0;
+                careScoreEl.textContent = '0';
+                
+                // Обновление полос
+                hungerBarEl.style.width = '100%';
+                cleanBarEl.style.width = '100%';
+                moodBarEl.style.width = '100%';
+                
+                hungerValueEl.textContent = '100%';
+                cleanValueEl.textContent = '100%';
+                moodValueEl.textContent = '100%';
+                
+                // Обновление статуса
+                animalStatusEl.textContent = "Статус: Счастлив";
+                animalFaceImg.style.filter = "none";
+                
+                // Новое случайное животное
+                const randomAnimal = gameState.animals[Math.floor(Math.random() * gameState.animals.length)];
+                animalFaceImg.src = randomAnimal.image;
+                
+                gameState.games.care.active = true;
+                careStartBtn.disabled = true;
+                
+                let timeLeft = 60;
+                careTimerEl.textContent = '01:00';
+                
+                // Запуск таймера ухудшения показателей
+                const statInterval = setInterval(() => {
+                    if (!gameState.games.care.active) {
+                        clearInterval(statInterval);
+                        return;
+                    }
+                    updateStats();
+                }, 1000);
+                
+                // Таймер игры
+                careTimer = setInterval(() => {
+                    timeLeft--;
+                    const minutes = Math.floor(timeLeft / 60);
+                    const seconds = timeLeft % 60;
+                    careTimerEl.textContent = `00:${seconds.toString().padStart(2, '0')}`;
+                    
+                    if (timeLeft <= 0) {
+                        endCareGame();
+                        clearInterval(statInterval);
+                    }
+                }, 1000);
+            });
+            
+            function endCareGame() {
+                clearInterval(careTimer);
+                
+                gameState.games.care.active = false;
+                careStartBtn.disabled = false;
+                
+                // Начисление монет
+                const coinsEarned = Math.floor(careScore / 5);
+                gameState.coins += coinsEarned;
+                showNotification(`Игра окончена! Вы заработали ${coinsEarned} монет`);
+                updateUI();
+                
+                // Обновляем статистику
+                if (careScore > gameState.highestCareScore) {
+                    gameState.highestCareScore = careScore;
+                }
+                gameState.totalGamesPlayed++;
+                checkAchievements();
+                
+                gameState.games.care.cooldown = 120;
+                careCooldownEl.style.display = 'flex';
             }
         }
         
@@ -3143,9 +4816,9 @@
                 gameState.games.snake.cooldown--;
                 const minutes = Math.floor(gameState.games.snake.cooldown / 60);
                 const seconds = gameState.games.snake.cooldown % 60;
-                snakeCooldownTimer.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                if (snakeCooldownTimer) snakeCooldownTimer.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
                 
-                if (gameState.games.snake.cooldown <= 0) {
+                if (gameState.games.snake.cooldown <= 0 && snakeCooldownEl) {
                     snakeCooldownEl.style.display = 'none';
                 }
             }
@@ -3155,9 +4828,9 @@
                 gameState.games.catch.cooldown--;
                 const minutes = Math.floor(gameState.games.catch.cooldown / 60);
                 const seconds = gameState.games.catch.cooldown % 60;
-                catchCooldownTimer.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                if (catchCooldownTimer) catchCooldownTimer.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
                 
-                if (gameState.games.catch.cooldown <= 0) {
+                if (gameState.games.catch.cooldown <= 0 && catchCooldownEl) {
                     catchCooldownEl.style.display = 'none';
                 }
             }
@@ -3167,10 +4840,22 @@
                 gameState.games.feeding.cooldown--;
                 const minutes = Math.floor(gameState.games.feeding.cooldown / 60);
                 const seconds = gameState.games.feeding.cooldown % 60;
-                feedingCooldownTimer.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                if (feedingCooldownTimer) feedingCooldownTimer.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
                 
-                if (gameState.games.feeding.cooldown <= 0) {
+                if (gameState.games.feeding.cooldown <= 0 && feedingCooldownEl) {
                     feedingCooldownEl.style.display = 'none';
+                }
+            }
+            
+            // Уход за животными
+            if (gameState.games.care.cooldown > 0) {
+                gameState.games.care.cooldown--;
+                const minutes = Math.floor(gameState.games.care.cooldown / 60);
+                const seconds = gameState.games.care.cooldown % 60;
+                if (careCooldownTimer) careCooldownTimer.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                
+                if (gameState.games.care.cooldown <= 0 && careCooldownEl) {
+                    careCooldownEl.style.display = 'none';
                 }
             }
         }
